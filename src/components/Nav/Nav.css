@@ -1,0 +1,5 @@
+.nav__not-logged-in {
+  display: flex;
+  flex-direction: row;
+  gap: 42px;
+}
