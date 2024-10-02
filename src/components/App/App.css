@@ -1,12 +1,8 @@
 .app {
-  background-image: url("../../assets/home-background.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .app__content {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 30px 104px 26px 104px;
+  /* max-width: 1360px; */
+  /* margin: 0 auto; */
+  /* padding: 30px 104px 26px 104px; */
 }

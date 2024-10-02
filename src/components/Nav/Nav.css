@@ -1,6 +1,21 @@
-.nav__not-logged-in {
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #fff;
+  align-items: center;
+}
+
+.nav__logo {
+  font-family: "Roboto-Slab";
+  font-size: 20px;
+  font-weight: 700;
+  margin: none;
+  color: #fff;
+}
+
+.nav__link-container {
   display: flex;
   flex-direction: row;
   gap: 42px;
-  color: #fff;
 }

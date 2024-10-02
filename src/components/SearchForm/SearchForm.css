@@ -24,8 +24,8 @@
 }
 
 .search__submit-button {
-  position: fixed;
-  right: 300px;
+  position: absolute;
+  right: 0;
   height: 64px;
   width: 168px;
   background-color: #2f71e5;
@@ -33,7 +33,5 @@
   margin: 0;
   padding: 0;
   border: none;
+  color: #fff;
 }
-
-/* why is the submit button fixed relative to the entire 
-page instead of the parent container?  */
