@@ -36,3 +36,8 @@
   text-align: center;
   border-style: solid;
 }
+
+.nav__link {
+  text-decoration: none;
+  color: #fff;
+}

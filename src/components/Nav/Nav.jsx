@@ -8,7 +8,10 @@ function Nav() {
       <div className="nav__link-container">
         {true ? (
           <>
-            <p className="nav__home-text">Home</p>
+            <Link to="/" className="nav__link">
+              <p className="nav__home-text">Home</p>
+            </Link>
+
             <button className="nav__signin-btn">Sign in</button>
           </>
         ) : (
