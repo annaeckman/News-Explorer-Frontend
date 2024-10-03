@@ -1,6 +1,7 @@
 .search__form-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   padding-top: 88px;
   padding-bottom: 80px;
 }

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-import Header from "../Header/Header";
-import AboutMe from "../AboutMe/AboutMe";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
 
 function App() {
   return (
     <div className="app">
       <div className="app__content">
-        <Header />
-        <AboutMe />
+        <Main />
+        <Footer />
       </div>
     </div>
   );

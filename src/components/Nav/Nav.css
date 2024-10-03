@@ -4,6 +4,8 @@
   justify-content: space-between;
   color: #fff;
   align-items: center;
+  border-bottom: solid;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .nav__logo {
@@ -18,4 +20,19 @@
   display: flex;
   flex-direction: row;
   gap: 42px;
+}
+
+.nav__signin-btn {
+  width: 152px;
+  height: 40px;
+  border-radius: 100px;
+  background: none;
+  border-color: #fff;
+  color: #fff;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  border-style: solid;
 }

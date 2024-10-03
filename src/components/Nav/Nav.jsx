@@ -9,7 +9,7 @@ function Nav() {
         {true ? (
           <>
             <p className="nav__home-text">Home</p>
-            <button className="nav__sign-in">Sign in</button>
+            <button className="nav__signin-btn">Sign in</button>
           </>
         ) : (
           <></>
