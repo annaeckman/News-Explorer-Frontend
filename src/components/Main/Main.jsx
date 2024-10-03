@@ -4,7 +4,7 @@ import AboutMe from "../AboutMe/AboutMe";
 
 function Main() {
   return (
-    <main>
+    <main className="main">
       <Header />
       <AboutMe />
     </main>
