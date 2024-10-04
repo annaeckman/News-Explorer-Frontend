@@ -6,17 +6,11 @@ function Nav() {
     <nav className="nav">
       <p className="nav__logo">NewsExplorer</p>
       <div className="nav__link-container">
-        {true ? (
-          <>
-            <Link to="/" className="nav__link">
-              <p className="nav__home-text">Home</p>
-            </Link>
+        <Link to="/" className="nav__link">
+          <p className="nav__home-text">Home</p>
+        </Link>
 
-            <button className="nav__signin-btn">Sign in</button>
-          </>
-        ) : (
-          <></>
-        )}
+        <button className="nav__signin-btn">Sign in</button>
       </div>
     </nav>
   );
