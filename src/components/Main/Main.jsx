@@ -2,10 +2,10 @@ import "../Main/Main.css";
 import Header from "../Header/Header";
 import AboutMe from "../AboutMe/AboutMe";
 
-function Main() {
+function Main({ handleChange }) {
   return (
     <main className="main">
-      <Header />
+      <Header handleChange={handleChange} />
       <AboutMe />
     </main>
   );
