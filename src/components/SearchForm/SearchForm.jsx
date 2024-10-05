@@ -1,9 +1,14 @@
 import "../SearchForm/SearchForm.css";
 
-function SearchForm({ handleChange }) {
+function SearchForm({ handleChange, handleSearchSubmit }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearchSubmit(e);
+  };
+
   return (
     <div className="search__form-container">
-      <form action="" className="search__form">
+      <form action="" onSubmit={handleSubmit} className="search__form">
         <div className="search__input-container">
           <input
             onChange={handleChange}
@@ -11,7 +16,6 @@ function SearchForm({ handleChange }) {
             className="search__input"
             placeholder="Nature"
           />
-          //add on change prob
           <button className="search__submit-button">Submit</button>
         </div>
       </form>

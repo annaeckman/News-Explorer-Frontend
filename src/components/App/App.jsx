@@ -12,29 +12,26 @@ import SavedNews from "../SavedNews/SavedNews";
 function App() {
   const [newsData, setNewsData] = useState({});
   const [currentKeyword, setCurrentKeyword] = useState("");
-  // store this as they are typing
   const [currentUser, setCurrentUser] = useState(null);
   const [activeModal, setActiveModal] = useState("");
-
-  // function for updating currentword
-  // grabbing current event to update state variable
-
-  // normal function instead:
-  // when you click the submit on the search form (on submit)
-
-  // set currentKeyword using the input from the search bar?
-  // define from as today's date use new Date() ?
-  // call get year get month and get day and assemble a string
-  // define to as today's date + 7
-  // call the getNews fn using all above parameters
-  //  call setNewsData with the data from the getNews fn
-  // add catch block
-  // dependency array is not empty, it's based on the search bar input?
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const value = e.target;
     setCurrentKeyword(value);
     console.log(currentKeyword.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    const from = "2024-10-04";
+    const to = "2024-10-11";
+    getNews(e, APIkey, from, to)
+      .then((data) => {
+        console.log(data);
+        setNewsData(data);
+        console.log(newsData);
+      })
+      .catch(console.error);
   };
 
   return (
@@ -43,7 +40,12 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Main handleChange={handleChange} />}
+            element={
+              <Main
+                handleSubmit={handleSearchSubmit}
+                handleChange={handleChange}
+              />
+            }
           ></Route>
           <Route path="/saved-news" element={<SavedNews />}></Route>
         </Routes>

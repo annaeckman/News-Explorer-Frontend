@@ -2,7 +2,7 @@ import "../Header/header.css";
 import Nav from "../Nav/Nav";
 import SearchForm from "../SearchForm/SearchForm";
 
-function Header({ handleChange }) {
+function Header({ handleSearchSubmit, handleChange }) {
   return (
     <header className="header">
       <Nav />
@@ -13,7 +13,10 @@ function Header({ handleChange }) {
           account
         </h2>
       </div>
-      <SearchForm handleChange={handleChange} />
+      <SearchForm
+        handleSearchSubmit={handleSearchSubmit}
+        handleChange={handleChange}
+      />
     </header>
   );
 }
