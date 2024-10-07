@@ -1,0 +1,17 @@
+.new-card__container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 323px;
+  height: 326px;
+  display: flex;
+  justify-content: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.news-card__image {
+  object-fit: cover;
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+.news-cards-list {
+  margin: 0;
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 19px;
+  list-style-type: none;
+  margin-top: 35px;
+  padding: 0;
+}

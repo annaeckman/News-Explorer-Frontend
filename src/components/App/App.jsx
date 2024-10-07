@@ -10,7 +10,7 @@ import Footer from "../Footer/Footer";
 import SavedNews from "../SavedNews/SavedNews";
 
 function App() {
-  const [newsData, setNewsData] = useState({});
+  const [newsData, setNewsData] = useState([]);
   const [currentKeyword, setCurrentKeyword] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
   const [activeModal, setActiveModal] = useState("");
@@ -40,6 +40,7 @@ function App() {
 
     getNews(currentKeyword, APIkey, from, to)
       .then((data) => {
+        debugger;
         setNewsData(data.articles);
       })
       .catch(console.error);
@@ -59,6 +60,7 @@ function App() {
               <Main
                 handleSearchSubmit={handleSearchSubmit}
                 handleChange={handleChange}
+                newsData={newsData}
               />
             }
           ></Route>

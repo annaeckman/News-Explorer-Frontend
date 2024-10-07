@@ -1,8 +1,9 @@
 import "../Main/Main.css";
 import Header from "../Header/Header";
 import AboutMe from "../AboutMe/AboutMe";
+import NewsCardsList from "../NewsCardList/NewsCardList";
 
-function Main({ handleChange, handleSearchSubmit }) {
+function Main({ handleChange, handleSearchSubmit, newsData }) {
   return (
     <main className="main">
       <Header
@@ -10,6 +11,7 @@ function Main({ handleChange, handleSearchSubmit }) {
         handleChange={handleChange}
       />
       <AboutMe />
+      <NewsCardsList newsData={newsData} />
     </main>
   );
 }

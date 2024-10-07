@@ -1,19 +1,19 @@
 import "../NewsCard/NewsCard.css";
 
-function NewsCard({ newsData }) {
+function NewsCard({ article }) {
   return (
-    <div class="news__card-section">
-      <div class="news-card">
-        <img src="image-url" alt="news image" class="news-card__image" />
-        <div class="news-card__content">
-          <span class="news-card__date">November 4, 2020</span>
-          <h2 class="news-card__title">
-            Everyone Needs a Special 'Sit Spot' in Nature
-          </h2>
-          <p class="news-card__description">
-            Ever since I read Richard Louv's influential book...
-          </p>
-          <span class="news-card__source">Treehugger</span>
+    <div className="news-card">
+      <div className="news-card__container">
+        <img
+          src={article.urlToImage}
+          alt={article.title}
+          className="news-card__image"
+        />
+        <div className="news-card__text">
+          <span className="news-card__date">{article.publishedAt}</span>
+          <h2 className="news-card__title">{article.title}</h2>
+          <p className="news-card__description">{article.description}</p>
+          <span className="news-card__source">{article.source.name}</span>
         </div>
       </div>
     </div>
