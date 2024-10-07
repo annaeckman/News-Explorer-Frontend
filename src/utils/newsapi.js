@@ -1,9 +1,15 @@
 import { processServerResponse } from "../utils/utils";
-const baseUrl = "http://newsapi.org/everything";
+const baseUrl = "https://newsapi.org/v2/everything";
 
 export const getNews = (q, apiKey, from, to) => {
   return fetch(
-    `${baseUrl}?q=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${apiKey}`
+    `${baseUrl}?q=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${apiKey}`,
+    {
+      method: "GET",
+      headers: {
+        authorization: "e0b4651c4b5048b9be7029a55f2a3270",
+      },
+    }
   ).then(processServerResponse);
 };
 

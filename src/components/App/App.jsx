@@ -17,22 +17,37 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
-    const value = e.target;
+    const value = e.target.value;
+    console.log(value);
     setCurrentKeyword(value);
-    console.log(currentKeyword.value);
   };
 
-  const handleSearchSubmit = (e) => {
-    const from = "2024-10-04";
-    const to = "2024-10-11";
-    getNews(e, APIkey, from, to)
+  const handleSearchSubmit = () => {
+    const todaysDate = new Date();
+    const currentYear = todaysDate.getFullYear();
+    const currentMonth = todaysDate.getMonth() + 1;
+    const currentDay = todaysDate.getDate();
+
+    const to = `${currentYear}-${currentMonth}-${currentDay}`;
+
+    const lastWeeksDate = new Date(
+      todaysDate.getTime() - 7 * 24 * 60 * 60 * 1000
+    );
+    const lastWeekYear = lastWeeksDate.getFullYear();
+    const lastWeekMonth = lastWeeksDate.getMonth() + 1;
+    const lastWeekDay = lastWeeksDate.getDate();
+    const from = `${lastWeekYear}-${lastWeekMonth}-${lastWeekDay}`;
+
+    getNews(currentKeyword, APIkey, from, to)
       .then((data) => {
-        console.log(data);
-        setNewsData(data);
-        console.log(newsData);
+        setNewsData(data.articles);
       })
       .catch(console.error);
   };
+
+  useEffect(() => {
+    console.log(newsData);
+  }, [newsData]);
 
   return (
     <div className="app">
@@ -42,7 +57,7 @@ function App() {
             path="/"
             element={
               <Main
-                handleSubmit={handleSearchSubmit}
+                handleSearchSubmit={handleSearchSubmit}
                 handleChange={handleChange}
               />
             }
