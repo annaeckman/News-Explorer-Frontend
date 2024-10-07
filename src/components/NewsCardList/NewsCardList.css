@@ -1,11 +1,22 @@
-.news-cards-list {
+.news-cards-list__list {
   margin: 0;
-  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 19px;
+  gap: 16px;
   list-style-type: none;
-  margin-top: 35px;
-  padding: 0;
+  margin-top: 64px;
+  padding-left: 104px;
+  padding-right: 104px;
+}
+
+.news-cards-list__title {
+  margin: 0;
+  padding-left: 104px;
+  padding-top: 80px;
+  font-family: "Roboto-Slab-reg";
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  text-align: left;
 }

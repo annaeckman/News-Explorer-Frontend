@@ -40,7 +40,6 @@ function App() {
 
     getNews(currentKeyword, APIkey, from, to)
       .then((data) => {
-        debugger;
         setNewsData(data.articles);
       })
       .catch(console.error);
