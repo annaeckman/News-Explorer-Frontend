@@ -2,7 +2,6 @@ import "../NewsCard/NewsCard.css";
 
 function NewsCard({ article }) {
   const source = article.source.name.toUpperCase().split(".")[0];
-  console.log(source);
 
   return (
     <div className="news-card__container">

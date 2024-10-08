@@ -18,7 +18,6 @@ function App() {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    console.log(value);
     setCurrentKeyword(value);
   };
 
@@ -45,9 +44,9 @@ function App() {
       .catch(console.error);
   };
 
-  useEffect(() => {
-    console.log(newsData);
-  }, [newsData]);
+  // useEffect(() => {
+  //   console.log(newsData);
+  // }, [newsData]);
 
   return (
     <div className="app">
