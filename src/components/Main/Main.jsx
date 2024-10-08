@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import AboutMe from "../AboutMe/AboutMe";
 import NewsCardsList from "../NewsCardList/NewsCardList";
 
-function Main({ handleChange, handleSearchSubmit, newsData }) {
+function Main({ handleChange, handleSearchSubmit, newsData, isSuccess }) {
   return (
     <main className="main">
       <Header
@@ -11,7 +11,7 @@ function Main({ handleChange, handleSearchSubmit, newsData }) {
         handleChange={handleChange}
       />
       <AboutMe />
-      <NewsCardsList newsData={newsData} />
+      <NewsCardsList newsData={newsData} isSuccess={isSuccess} />
     </main>
   );
 }

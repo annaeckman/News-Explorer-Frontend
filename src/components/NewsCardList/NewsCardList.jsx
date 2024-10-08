@@ -10,7 +10,7 @@ import { useState } from "react";
 
 // i need to hide the button when all 100 items are shown
 
-function NewsCardList({ newsData }) {
+function NewsCardList({ newsData, isSuccess }) {
   const [activeNewsDataLength, setActiveNewsDataLength] = useState(3);
   const activeNewsDataItems = newsData.slice(0, activeNewsDataLength);
 
@@ -19,7 +19,13 @@ function NewsCardList({ newsData }) {
   };
 
   return (
-    <section className="news-cards-list">
+    <section
+      className={
+        newsData.length === 0 && !isSuccess
+          ? "news-cards-list_hidden"
+          : "news-cards-list"
+      }
+    >
       <h2 className="news-cards-list__title">Search results</h2>
       <div className="news-cards-list__container">
         <ul className="news-cards-list__list">

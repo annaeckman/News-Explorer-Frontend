@@ -20,3 +20,7 @@
   line-height: 46px;
   text-align: left;
 }
+
+.news-cards-list_hidden {
+  display: none;
+}

@@ -15,6 +15,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [activeModal, setActiveModal] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -37,16 +39,20 @@ function App() {
     const lastWeekDay = lastWeeksDate.getDate();
     const from = `${lastWeekYear}-${lastWeekMonth}-${lastWeekDay}`;
 
+    setIsLoading(true);
+    setNewsData([]);
+    setIsSuccess(false);
+    setIsError(false);
+
     getNews(currentKeyword, APIkey, from, to)
       .then((data) => {
+        setIsLoading(false);
+        setIsSuccess(true);
         setNewsData(data.articles);
       })
       .catch(console.error);
+    // put setisError in the catch block
   };
-
-  // useEffect(() => {
-  //   console.log(newsData);
-  // }, [newsData]);
 
   return (
     <div className="app">
@@ -59,6 +65,7 @@ function App() {
                 handleSearchSubmit={handleSearchSubmit}
                 handleChange={handleChange}
                 newsData={newsData}
+                isSuccess={isSuccess}
               />
             }
           ></Route>
