@@ -24,3 +24,20 @@
 .news-cards-list_hidden {
   display: none;
 }
+
+.news-cards-list__more-button {
+  display: block;
+  margin: auto;
+  margin-top: 64px;
+  height: 64px;
+  width: 288px;
+  border-radius: 80px;
+  font-family: "Roboto";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  border: none;
+  background-color: #e8e8e8;
+  padding: 0;
+}

@@ -10,8 +10,8 @@ function Main({ handleChange, handleSearchSubmit, newsData, isSuccess }) {
         handleSearchSubmit={handleSearchSubmit}
         handleChange={handleChange}
       />
-      <AboutMe />
       <NewsCardsList newsData={newsData} isSuccess={isSuccess} />
+      <AboutMe />
     </main>
   );
 }
