@@ -1,12 +1,24 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 
 const LoginModal = ({
   isOpen,
   onClose,
   isLoading,
   setActiveModal,
-  handleChange,
+  handleLogin,
 }) => {
+  const { values, handleChange, isValid, resetForm, errors } =
+    useFormAndValidation();
+
+  const handleSubmit = () => {
+    handleLogin(values, resetCurrentForm);
+  };
+
+  const resetCurrentForm = () => {
+    resetForm({ email: "", password: "" });
+  };
+
   return (
     <ModalWithForm
       title="Sign in"
@@ -15,6 +27,8 @@ const LoginModal = ({
       altButtonClick={() => setActiveModal("register")}
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
+      formValid={isValid}
     >
       <label className="modal__label" htmlFor="email-login">
         Email
@@ -27,10 +41,18 @@ const LoginModal = ({
         minLength="4"
         maxLength="64"
         placeholder="Enter email"
-        value=""
+        value={values.email || ""}
         onChange={handleChange}
         required
       />
+      <span
+        className={`modal__input-error ${
+          errors.email ? "modal__input-error_visible" : ""
+        }`}
+        id="email-error"
+      >
+        {errors.email}
+      </span>
       <label className="modal__label" htmlFor="password-login">
         Password
       </label>
@@ -40,10 +62,18 @@ const LoginModal = ({
         name="password"
         type="password"
         placeholder="Enter password"
-        value=""
+        value={values.password || ""}
         onChange={handleChange}
         required
       />
+      <span
+        className={`modal__input-error ${
+          errors.password ? "modal__input-error_visible" : ""
+        }`}
+        id="password-error"
+      >
+        {errors.password}
+      </span>
     </ModalWithForm>
   );
 };

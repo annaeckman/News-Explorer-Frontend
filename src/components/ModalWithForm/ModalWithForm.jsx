@@ -9,6 +9,7 @@ function ModalWithForm({
   buttonText,
   altButtonClick,
   altButtonText,
+  formValid,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +28,13 @@ function ModalWithForm({
         <form action="" onSubmit={handleSubmit} className="modal__form">
           {children}
           <div className="modal__buttons-container">
-            <button className="modal__submit" type="submit">
+            <button
+              className={`modal__submit modal__el_hovered ${
+                !formValid ? "modal__submit_disabled" : ""
+              }`}
+              type="submit"
+              disabled={`${!formValid ? "disabled" : ""}`}
+            >
               {buttonText}
             </button>
             <button

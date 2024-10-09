@@ -9,6 +9,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 function App() {
   const [newsData, setNewsData] = useState([]);
@@ -32,9 +33,12 @@ function App() {
     setCurrentKeyword(value);
   };
 
-  const handleModalChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+  const handleLogin = (values, resetLoginForm) => {
+    if (!values) {
+      return;
+    }
+    // stub out login without backend here
+    // put resetLogin Form in the then block
   };
 
   const handleSearchSubmit = () => {
@@ -92,7 +96,13 @@ function App() {
           onClose={closeActiveModal}
           isLoading={isLoading}
           setActiveModal={setActiveModal}
-          handleChange={handleModalChange}
+          handleLogin={handleLogin}
+        />
+        <RegisterModal
+          isOpen={activeModal === "register"}
+          onClose={closeActiveModal}
+          isLoading={isLoading}
+          setActiveModal={setActiveModal}
         />
       </div>
     </div>

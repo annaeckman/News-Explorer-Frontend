@@ -20,7 +20,6 @@
   position: relative;
   padding: 34px 36px 28px;
   max-width: 430px;
-  max-height: 380px;
   box-sizing: border-box;
   width: 100%;
   border-radius: 20px;
@@ -44,7 +43,6 @@
 .modal__title {
   margin: 0;
   font-size: 16px;
-  padding-bottom: 24px;
   font-family: "Roboto";
   font-size: 24px;
   font-weight: 900;
@@ -66,6 +64,11 @@
   line-height: 14.52px;
   text-align: left;
   color: #2f71e5;
+  padding-top: 31px;
+}
+
+.modal__label:first-of-type {
+  padding-top: 24px;
 }
 
 .modal__input {
@@ -78,7 +81,17 @@
   border-bottom: 1px solid rgba(0, 0, 0);
   padding: 0;
   padding-top: 8px;
-  margin-bottom: 31px;
+  padding-bottom: 9px;
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+  text-align: left;
+}
+
+.modal__input::placeholder {
+  opacity: 0.2;
+  color: #000000;
 }
 
 .modal__submit {
@@ -111,6 +124,7 @@
 .modal__buttons-container {
   display: flex;
   flex-direction: column;
+  padding-top: 43px;
 }
 
 .modal__text-button {
@@ -122,4 +136,23 @@
   font-weight: 400;
   line-height: 16.94px;
   text-align: center;
+}
+
+.modal__el_hovered:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.modal__submit:disabled {
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.modal__input-error {
+  color: red;
+  display: none;
+}
+
+.modal__input-error_visible {
+  display: block;
 }
