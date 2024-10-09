@@ -1,7 +1,7 @@
 import "../Nav/Nav.css";
 import { Link } from "react-router-dom";
 
-function Nav() {
+function Nav({ handleLoginClick }) {
   return (
     <nav className="nav">
       <p className="nav__logo">NewsExplorer</p>
@@ -10,7 +10,9 @@ function Nav() {
           <p className="nav__home-text">Home</p>
         </Link>
 
-        <button className="nav__signin-btn">Sign in</button>
+        <button onClick={handleLoginClick} className="nav__signin-btn">
+          Sign in
+        </button>
       </div>
     </nav>
   );

@@ -5,6 +5,15 @@
   padding: 32px 104px;
 }
 
+.footer__copyright {
+  color: #b6bcbf;
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+
 .footer__links-container {
   display: flex;
   flex-direction: row;
@@ -15,4 +24,14 @@
 .footer__icon {
   height: 20px;
   width: 20px;
+}
+
+.footer__link {
+  text-decoration: none;
+  font-family: "Roboto";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  color: #1a1b22;
 }

@@ -8,6 +8,7 @@ import "./App.css";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import SavedNews from "../SavedNews/SavedNews";
+import LoginModal from "../LoginModal/LoginModal";
 
 function App() {
   const [newsData, setNewsData] = useState([]);
@@ -18,9 +19,22 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const handleLoginClick = () => {
+    setActiveModal("login");
+  };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
+
   const handleChange = (e) => {
     const value = e.target.value;
     setCurrentKeyword(value);
+  };
+
+  const handleModalChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
   };
 
   const handleSearchSubmit = () => {
@@ -66,12 +80,20 @@ function App() {
                 handleChange={handleChange}
                 newsData={newsData}
                 isSuccess={isSuccess}
+                handleLoginClick={handleLoginClick}
               />
             }
           ></Route>
           <Route path="/saved-news" element={<SavedNews />}></Route>
         </Routes>
         <Footer />
+        <LoginModal
+          isOpen={activeModal === "login"}
+          onClose={closeActiveModal}
+          isLoading={isLoading}
+          setActiveModal={setActiveModal}
+          handleChange={handleModalChange}
+        />
       </div>
     </div>
   );
