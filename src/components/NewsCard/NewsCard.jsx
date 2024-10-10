@@ -6,6 +6,7 @@ function NewsCard({ article }) {
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
+        <button className="news-card__save"></button>
         <img
           src={article.urlToImage}
           alt={article.title}
