@@ -1,6 +1,8 @@
 import "../NewsCardList/NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 import { useState } from "react";
+import notFound from "../../assets/not-found.png";
+import searchForNews from "../../assets/search-for-news.png";
 
 // initial empty state, no search term, hidden
 // happy path: news data has length, show results and show more
@@ -10,7 +12,7 @@ import { useState } from "react";
 
 // i need to hide the button when all 100 items are shown
 
-function NewsCardList({ newsData, isSuccess }) {
+function NewsCardList({ newsData, isSuccess, isLoading }) {
   const [activeNewsDataLength, setActiveNewsDataLength] = useState(3);
   const activeNewsDataItems = newsData.slice(0, activeNewsDataLength);
 
@@ -26,6 +28,39 @@ function NewsCardList({ newsData, isSuccess }) {
           : "news-cards-list"
       }
     >
+      <div
+        className={
+          newsData.length === 0 && isSuccess
+            ? "news-cards-list__not-found"
+            : "news-cards-list__not-found_hidden"
+        }
+      >
+        <img
+          src={notFound}
+          alt="old school microscope with a sad face inside"
+          className="news-cards-list__not-found-icon"
+        />
+        <h3 className="news-cards-list__not-found-title">Nothing found</h3>
+        <p className="news-cards-list__not-found-subtitle">
+          Sorry, but nothing matched your search terms.
+        </p>
+      </div>
+      <div
+        className={
+          isLoading
+            ? "news-cards-list__preloader"
+            : "news-cards-list__preloader_hidden"
+        }
+      >
+        <img
+          src={searchForNews}
+          alt="a spinning circle loading icon"
+          className="news-cards-list__preloader-icon"
+        />
+        <h3 className="news-cards-list__preloader-text">
+          Searching for news...
+        </h3>
+      </div>
       <h2 className="news-cards-list__title">Search results</h2>
       <div className="news-cards-list__container">
         <ul className="news-cards-list__list">

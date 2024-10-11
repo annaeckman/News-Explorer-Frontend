@@ -10,6 +10,7 @@ import Footer from "../Footer/Footer";
 import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function App() {
   const [newsData, setNewsData] = useState([]);
@@ -31,14 +32,6 @@ function App() {
   const handleChange = (e) => {
     const value = e.target.value;
     setCurrentKeyword(value);
-  };
-
-  const handleLogin = (values, resetLoginForm) => {
-    if (!values) {
-      return;
-    }
-    // stub out login without backend here
-    // put resetLogin Form in the then block
   };
 
   const handleSearchSubmit = () => {
@@ -68,43 +61,84 @@ function App() {
         setIsSuccess(true);
         setNewsData(data.articles);
       })
-      .catch(console.error);
-    // put setisError in the catch block
+      .catch((err) => {
+        console.error(err);
+        setIsError(true);
+      });
+  };
+
+  const handleRegistration = (values, resetRegistrationForm) => {
+    if (!values) return;
+
+    //   registerUser(values)
+    //     .then((res) => {
+    //       setIsLoggedIn(true);
+    //       setCurrentUser(res.data);
+    //       resetRegistrationForm();
+    //       closeActiveModal();
+    //     })
+    //     .catch((res) => {
+    //       console.log(`There is an error in handleUserRegistration: ${res}`);
+    //     });
+  };
+
+  const handleLogin = (values, resetLoginForm) => {
+    if (!values) {
+      return;
+    }
+    // signinUser(values)
+    //   .then((res) => {
+    //     setToken(res.token);
+    //     return getUserByToken(res.token);
+    //   })
+    //   .then((user) => {
+    //     setCurrentUser(user);
+    //     setIsLoggedIn(true);
+    //     closeActiveModal();
+    //     navigate(protectedDestination || "/");
+    //     resetLoginForm();
+    //   })
+    //   .catch((err) => {
+    //     console.error("Login failed", err);
+    //   });
   };
 
   return (
     <div className="app">
-      <div className="app__content">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                handleSearchSubmit={handleSearchSubmit}
-                handleChange={handleChange}
-                newsData={newsData}
-                isSuccess={isSuccess}
-                handleLoginClick={handleLoginClick}
-              />
-            }
-          ></Route>
-          <Route path="/saved-news" element={<SavedNews />}></Route>
-        </Routes>
-        <Footer />
-        <LoginModal
-          isOpen={activeModal === "login"}
-          onClose={closeActiveModal}
-          isLoading={isLoading}
-          setActiveModal={setActiveModal}
-          handleLogin={handleLogin}
-        />
-        <RegisterModal
-          isOpen={activeModal === "register"}
-          onClose={closeActiveModal}
-          isLoading={isLoading}
-          setActiveModal={setActiveModal}
-        />
-      </div>
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="app__content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  handleSearchSubmit={handleSearchSubmit}
+                  handleChange={handleChange}
+                  newsData={newsData}
+                  isSuccess={isSuccess}
+                  handleLoginClick={handleLoginClick}
+                  isLoading={isLoading}
+                />
+              }
+            ></Route>
+            <Route path="/saved-news" element={<SavedNews />}></Route>
+          </Routes>
+          <Footer />
+          <LoginModal
+            isOpen={activeModal === "login"}
+            onClose={closeActiveModal}
+            isLoading={isLoading}
+            setActiveModal={setActiveModal}
+            handleLogin={handleLogin}
+          />
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            onClose={closeActiveModal}
+            isLoading={isLoading}
+            setActiveModal={setActiveModal}
+          />
+        </div>
+      </CurrentUserContext.Provider>
     </div>
   );
 }

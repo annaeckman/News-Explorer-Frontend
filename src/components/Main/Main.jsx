@@ -9,6 +9,7 @@ function Main({
   newsData,
   isSuccess,
   handleLoginClick,
+  isLoading,
 }) {
   return (
     <main className="main">
@@ -17,7 +18,11 @@ function Main({
         handleChange={handleChange}
         handleLoginClick={handleLoginClick}
       />
-      <NewsCardsList newsData={newsData} isSuccess={isSuccess} />
+      <NewsCardsList
+        newsData={newsData}
+        isSuccess={isSuccess}
+        isLoading={isLoading}
+      />
       <AboutMe />
     </main>
   );

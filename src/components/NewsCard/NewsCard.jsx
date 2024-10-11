@@ -24,9 +24,11 @@ function NewsCard({ article }) {
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
-        <button className="news-card__sign-in-btn">
+        <button className="news-card__sign-in-btn news-card__sign-in-btn_hidden">
           Sign in to save articles
         </button>
+        {/* add logic to above button class that uses isLoggedIn context 
+        to remove the hidden class or not */}
         <button className="news-card__save"></button>
         <img
           src={article.urlToImage}

@@ -24,6 +24,10 @@
   border: none;
 }
 
+.search__input:focus {
+  border: none;
+}
+
 .search__submit-button {
   position: absolute;
   right: 0;
