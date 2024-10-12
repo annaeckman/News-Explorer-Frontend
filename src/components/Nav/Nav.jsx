@@ -1,36 +1,71 @@
 import "../Nav/Nav.css";
 import { Link } from "react-router-dom";
-
-// want isInverse prop
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import logoutWhite from "../../assets/logout-white.png";
+import logoutBlack from "../../assets/logout-black.png";
 
 function Nav({ handleLoginClick }) {
-  return (
-    <nav className="nav">
-      <p className="nav__logo">NewsExplorer</p>
-      <div className="nav__link-container">
-        <Link to="/" className="nav__link">
-          <p className="nav__home-text">Home</p>
-        </Link>
+  const isDarkBackground = false;
+  const isLoggedIn = true;
 
-        <button onClick={handleLoginClick} className="nav__signin-btn">
+  const logoClass = isDarkBackground ? "nav__logo--white" : "nav__logo--black";
+  const signinBtnClass = isDarkBackground
+    ? "nav__signin-btn nav__signin-btn--white"
+    : "nav__signin-btn nav__signin-btn--black";
+  const navLinkClass = isDarkBackground
+    ? "nav__link nav__link--white"
+    : "nav__link nav__link--black";
+  const signoutDivClass = isDarkBackground
+    ? "nav__signout-div nav__signout-div--white"
+    : "nav__signout-div nav__signout-div--black";
+  const signoutBtnClass = isDarkBackground
+    ? "nav__signout-btn nav__signout-btn--white"
+    : "nav__signout-btn nav__signout-btn-black";
+
+  const isNotLoggedInNavMarkup = (
+    <ul className="nav__list">
+      <li className="nav__list-item">
+        <Link to="/" className={navLinkClass}>
+          Home
+        </Link>
+      </li>
+      <li>
+        <button onClick={handleLoginClick} className={signinBtnClass}>
           Sign in
         </button>
-      </div>
+      </li>
+    </ul>
+  );
+
+  const isLoggedInNavMarkup = (
+    <ul className="nav__list">
+      <li className="nav__list-item">
+        <Link to="/" className={navLinkClass}>
+          Home
+        </Link>
+      </li>
+      <li className="nav__list-item">
+        <Link to="/" className={navLinkClass}>
+          Saved Articles
+        </Link>
+      </li>
+      <li className="nav__list-item">
+        <div className={signoutDivClass}>
+          <p className="nav__signout-name">Elise</p>
+          <button className={signoutBtnClass}></button>
+        </div>
+      </li>
+    </ul>
+  );
+
+  return (
+    <nav className="nav">
+      <p className={logoClass}>NewsExplorer</p>
+      {!isLoggedIn ? isNotLoggedInNavMarkup : isLoggedInNavMarkup}
     </nav>
   );
 }
 
 export default Nav;
-
-// use the isLoggedIn state to figure out if the user is logged in,
-// put in some logic to display correct div element based on the logged in state
-// toggle between nav__not-logged-in and nav_logged-in
-
-//tool react fragment
-//tag that's not a tag
-
-//ternary operators inside the class names
-
-//className={`nav__link ${lightMode? 'nav__link_light' : ''}`}
 
 // for mobile, have classes that hide or show in media queries for mobile

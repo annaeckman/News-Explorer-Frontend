@@ -2,13 +2,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: #fff;
   align-items: center;
   border-bottom: solid;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
-.nav__logo {
+.nav__logo--white {
   font-family: "Roboto-Slab";
   font-size: 20px;
   font-weight: 700;
@@ -16,11 +15,24 @@
   color: #fff;
 }
 
-.nav__link-container {
+.nav__logo--black {
+  font-family: "Roboto-Slab";
+  font-size: 20px;
+  font-weight: 700;
+  margin: none;
+  color: #000;
+}
+
+.nav__list-item {
+  text-decoration: none;
+}
+
+.nav__list {
   display: flex;
   flex-direction: row;
   gap: 42px;
   align-items: center;
+  list-style: none;
 }
 
 .nav__signin-btn {
@@ -28,14 +40,23 @@
   height: 40px;
   border-radius: 100px;
   background: none;
-  border-color: #fff;
-  color: #fff;
   font-family: "Roboto";
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
   text-align: center;
   border-style: solid;
+  border-width: 1px;
+}
+
+.nav__signin-btn--white {
+  border-color: #fff;
+  color: #fff;
+}
+
+.nav__signin-btn--black {
+  border-color: #000;
+  color: #000;
 }
 
 .nav__signin-btn:hover {
@@ -43,14 +64,69 @@
 }
 
 .nav__link {
-  text-decoration: none;
-  color: #fff;
-}
-
-.nav__home-text {
   font-family: "Roboto";
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
   text-align: center;
+  text-decoration: none;
+}
+
+.nav__link--white {
+  color: #fff;
+}
+
+.nav__link--black {
+  color: #1a1b22;
+}
+
+.nav__signout-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 100px;
+  border-width: 1px;
+  border: solid;
+  height: 48px;
+  width: 112px;
+  background: transparent;
+  padding: 0;
+}
+
+.nav__signout-name {
+  font-family: "Roboto";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.nav__signout-div--white {
+  color: #fff;
+}
+
+.nav__signout-div--black {
+  color: #1a1b22;
+}
+
+.nav__signout-btn {
+  border: none;
+  background-image: url("../../assets/logout-black.png");
+  height: 24px;
+  width: 24px;
+  background-size: cover;
+  background-color: transparent;
+}
+
+.nav__signout-btn:hover {
+  cursor: pointer;
+}
+
+.nav__signout-btn--white {
+  background-image: url("../../assets/logout-white.png");
+}
+
+.nav__signout-btn--black {
+  background-image: url("../../assets/logout-black.png");
 }
