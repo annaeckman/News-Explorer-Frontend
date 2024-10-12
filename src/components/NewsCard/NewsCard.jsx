@@ -24,18 +24,21 @@ function NewsCard({ article }) {
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
-        <button className="news-card__sign-in-btn news-card__sign-in-btn_hidden">
+        <div className="news-card__sign-in-btn news-card__sign-in-btn_hidden">
           Sign in to save articles
-        </button>
-        {/* add logic to above button class that uses isLoggedIn context 
-        to remove the hidden class or not */}
-        <button className="news-card__save"></button>
+        </div>
+        {/* add logic to above button class that uses usercontext context 
+        to remove the hidden class or not and enable the save button */}
+        <button disabled className="news-card__save"></button>
         <img
           src={article.urlToImage}
           alt={article.title}
           className="news-card__image"
         />
       </div>
+      {/* use aria disabled to make this stupid button more accessible and 
+      not completely disappear when it is native disabled
+      make save button & icon it's own component */}
       <div className="news-card__text">
         <span className="news-card__date">{dateInWords}</span>
         <h2 className="news-card__title">{article.title}</h2>

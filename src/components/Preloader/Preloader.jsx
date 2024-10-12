@@ -1,5 +1,7 @@
 import "./Preloader.css";
 
-function ClothesSection() {
+function Preloader() {
   return <div className="circle-preloader"></div>;
 }
+
+export default Preloader;

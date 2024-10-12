@@ -1,6 +1,8 @@
 import "../Nav/Nav.css";
 import { Link } from "react-router-dom";
 
+// want isInverse prop
+
 function Nav({ handleLoginClick }) {
   return (
     <nav className="nav">

@@ -3,16 +3,11 @@ import NewsCard from "../NewsCard/NewsCard";
 import { useState } from "react";
 import notFound from "../../assets/not-found.png";
 import searchForNews from "../../assets/search-for-news.png";
-
-// initial empty state, no search term, hidden
-// happy path: news data has length, show results and show more
-// no results for search term: "no results please try again"
-// wrapper component that differentiates btwn these 3, then render's each
-// of the above 3 options
+import Preloader from "../Preloader/Preloader";
 
 // i need to hide the button when all 100 items are shown
 
-function NewsCardList({ newsData, isSuccess, isLoading }) {
+function NewsCardList({ newsData, isSuccess, isLoading, isError }) {
   const [activeNewsDataLength, setActiveNewsDataLength] = useState(3);
   const activeNewsDataItems = newsData.slice(0, activeNewsDataLength);
 
@@ -20,17 +15,19 @@ function NewsCardList({ newsData, isSuccess, isLoading }) {
     setActiveNewsDataLength((prevState) => prevState + 3);
   };
 
+  const isInitialState = newsData.length === 0 && !isSuccess && !isError;
+  const emptyNewsDataArray = newsData.length === 0 && isSuccess;
+
+  // option to: render entire preloader conditionally based on isLoading state! don't deal with css ha!
+
   return (
     <section
-      className={
-        newsData.length === 0 && !isSuccess
-          ? "news-cards-list_hidden"
-          : "news-cards-list"
-      }
+      className={isInitialState ? "news-cards-list_hidden" : "news-cards-list"}
     >
+      {/* Not Found: */}
       <div
         className={
-          newsData.length === 0 && isSuccess
+          emptyNewsDataArray
             ? "news-cards-list__not-found"
             : "news-cards-list__not-found_hidden"
         }
@@ -45,6 +42,8 @@ function NewsCardList({ newsData, isSuccess, isLoading }) {
           Sorry, but nothing matched your search terms.
         </p>
       </div>
+
+      {/* Preloader: */}
       <div
         className={
           isLoading
@@ -52,15 +51,12 @@ function NewsCardList({ newsData, isSuccess, isLoading }) {
             : "news-cards-list__preloader_hidden"
         }
       >
-        <img
-          src={searchForNews}
-          alt="a spinning circle loading icon"
-          className="news-cards-list__preloader-icon"
-        />
+        <Preloader />
         <h3 className="news-cards-list__preloader-text">
           Searching for news...
         </h3>
       </div>
+
       <h2 className="news-cards-list__title">Search results</h2>
       <div className="news-cards-list__container">
         <ul className="news-cards-list__list">
