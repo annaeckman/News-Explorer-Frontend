@@ -1,67 +1,25 @@
 import "../Nav/Nav.css";
 import { Link } from "react-router-dom";
+import NavLoggedIn from "../NavLoggedIn/NavLoggedIn";
+import NavLoggedOut from "../NavLoggedOut/NavLoggedOut";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import logoutWhite from "../../assets/logout-white.png";
-import logoutBlack from "../../assets/logout-black.png";
 
-function Nav({ handleLoginClick }) {
-  const isDarkBackground = false;
-  const isLoggedIn = true;
+// pull out logged in nav as its own component and logged out nav
 
-  const logoClass = isDarkBackground ? "nav__logo--white" : "nav__logo--black";
-  const signinBtnClass = isDarkBackground
-    ? "nav__signin-btn nav__signin-btn--white"
-    : "nav__signin-btn nav__signin-btn--black";
-  const navLinkClass = isDarkBackground
-    ? "nav__link nav__link--white"
-    : "nav__link nav__link--black";
-  const signoutDivClass = isDarkBackground
-    ? "nav__signout-div nav__signout-div--white"
-    : "nav__signout-div nav__signout-div--black";
-  const signoutBtnClass = isDarkBackground
-    ? "nav__signout-btn nav__signout-btn--white"
-    : "nav__signout-btn nav__signout-btn-black";
-
-  const isNotLoggedInNavMarkup = (
-    <ul className="nav__list">
-      <li className="nav__list-item">
-        <Link to="/" className={navLinkClass}>
-          Home
-        </Link>
-      </li>
-      <li>
-        <button onClick={handleLoginClick} className={signinBtnClass}>
-          Sign in
-        </button>
-      </li>
-    </ul>
-  );
-
-  const isLoggedInNavMarkup = (
-    <ul className="nav__list">
-      <li className="nav__list-item">
-        <Link to="/" className={navLinkClass}>
-          Home
-        </Link>
-      </li>
-      <li className="nav__list-item">
-        <Link to="/" className={navLinkClass}>
-          Saved Articles
-        </Link>
-      </li>
-      <li className="nav__list-item">
-        <div className={signoutDivClass}>
-          <p className="nav__signout-name">Elise</p>
-          <button className={signoutBtnClass}></button>
-        </div>
-      </li>
-    </ul>
-  );
+function Nav({ handleLoginClick, isInverse }) {
+  const isLoggedIn = false;
+  // how should i handle putting this above logic in??
+  // add onClick to signout button
+  // add the little bar that follows the border, depending on what page you're on
 
   return (
-    <nav className="nav">
-      <p className={logoClass}>NewsExplorer</p>
-      {!isLoggedIn ? isNotLoggedInNavMarkup : isLoggedInNavMarkup}
+    <nav className="nav" data-theme={isInverse ? "light" : "dark"}>
+      <p className="nav__logo">NewsExplorer</p>
+      {!isLoggedIn ? (
+        <NavLoggedOut handleLoginClick={handleLoginClick} />
+      ) : (
+        <NavLoggedIn isInverse={isInverse} />
+      )}
     </nav>
   );
 }

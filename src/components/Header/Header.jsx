@@ -5,7 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 function Header({ handleSearchSubmit, handleChange, handleLoginClick }) {
   return (
     <header className="header">
-      <Nav handleLoginClick={handleLoginClick} />
+      <Nav handleLoginClick={handleLoginClick} isInverse={false} />
       <div className="header__text-container">
         <h1 className="header__title">What's going on in the world?</h1>
         <h2 className="header__subtitle">

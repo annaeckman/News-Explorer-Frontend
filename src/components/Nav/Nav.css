@@ -4,23 +4,25 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: solid;
-  border-color: rgba(0, 0, 0, 0.2);
+  border-color: var(--border);
 }
 
-.nav__logo--white {
+.nav[data-theme="dark"] {
+  --primary: #fff;
+  --border: rgba(0, 0, 0, 0.2);
+}
+
+.nav[data-theme="light"] {
+  --primary: black;
+  --border: rgba(255, 255, 255, 0.3);
+}
+
+.nav__logo {
   font-family: "Roboto-Slab";
   font-size: 20px;
   font-weight: 700;
   margin: none;
-  color: #fff;
-}
-
-.nav__logo--black {
-  font-family: "Roboto-Slab";
-  font-size: 20px;
-  font-weight: 700;
-  margin: none;
-  color: #000;
+  color: var(--primary);
 }
 
 .nav__list-item {
@@ -47,16 +49,8 @@
   text-align: center;
   border-style: solid;
   border-width: 1px;
-}
-
-.nav__signin-btn--white {
-  border-color: #fff;
-  color: #fff;
-}
-
-.nav__signin-btn--black {
-  border-color: #000;
-  color: #000;
+  color: var(--primary);
+  border-color: (var(--primary));
 }
 
 .nav__signin-btn:hover {
@@ -70,14 +64,7 @@
   line-height: 24px;
   text-align: center;
   text-decoration: none;
-}
-
-.nav__link--white {
-  color: #fff;
-}
-
-.nav__link--black {
-  color: #1a1b22;
+  color: var(--primary);
 }
 
 .nav__signout-div {
@@ -93,6 +80,7 @@
   width: 112px;
   background: transparent;
   padding: 0;
+  color: var(--primary);
 }
 
 .nav__signout-name {
@@ -100,14 +88,6 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
-}
-
-.nav__signout-div--white {
-  color: #fff;
-}
-
-.nav__signout-div--black {
-  color: #1a1b22;
 }
 
 .nav__signout-btn {
@@ -125,8 +105,4 @@
 
 .nav__signout-btn--white {
   background-image: url("../../assets/logout-white.png");
-}
-
-.nav__signout-btn--black {
-  background-image: url("../../assets/logout-black.png");
 }
