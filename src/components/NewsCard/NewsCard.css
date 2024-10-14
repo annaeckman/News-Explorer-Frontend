@@ -142,3 +142,13 @@
     left: 16px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .news-card__container {
+    height: 440px;
+    width: 350px;
+  }
+  .news-card__image-container {
+    height: 196px;
+  }
+}

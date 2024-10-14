@@ -41,3 +41,12 @@
     padding: 18px 40px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .footer {
+    flex-direction: column-reverse;
+    align-items: center;
+    max-width: 320px;
+    padding: 20px 16px 22px;
+  }
+}

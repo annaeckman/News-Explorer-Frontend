@@ -16,7 +16,7 @@ import {
   lastWeekDay,
 } from "../../utils/Dates";
 
-function Main({ handleLoginClick }) {
+function Main({ handleLoginClick, handleHamburgerClick }) {
   const [newsData, setNewsData] = useState([]);
   const [currentKeyword, setCurrentKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -67,6 +67,7 @@ function Main({ handleLoginClick }) {
         handleSearchSubmit={handleSearchSubmit}
         handleChange={handleChange}
         handleLoginClick={handleLoginClick}
+        handleHamburgerClick={handleHamburgerClick}
       />
       <NewsCardsList
         newsData={newsData}

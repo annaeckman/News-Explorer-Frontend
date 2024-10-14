@@ -131,3 +131,15 @@
     font-size: 30px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .news-cards-list__list {
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 58px;
+  }
+  .news-cards-list__list {
+    flex-direction: column;
+    align-content: center;
+  }
+}

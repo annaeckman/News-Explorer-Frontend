@@ -9,7 +9,7 @@
 
 .nav[data-theme="dark"] {
   --primary: #fff;
-  --border: rgba(0, 0, 0, 0.2);
+  --border: rgba(255, 255, 255, 0.2);
 }
 
 .nav[data-theme="light"] {
@@ -23,6 +23,10 @@
   font-weight: 700;
   margin: none;
   color: var(--primary);
+}
+
+.nav__menu-btn {
+  display: none;
 }
 
 .nav__list-item {
@@ -106,4 +110,36 @@
 
 .nav__signout-btn--white {
   background-image: url("../../assets/logout-white.png");
+}
+
+@media screen and (max-width: 600px) {
+  .nav__list {
+    display: none;
+  }
+
+  .nav__menu-btn {
+    display: block;
+    height: 24px;
+    width: 24px;
+    border: none;
+    background: transparent;
+    background-image: url("../../assets/menu-white.png");
+  }
+
+  .nav__menu-btn--black {
+    display: block;
+    background-image: url("../../assets/menu-black.png");
+    height: 24px;
+    width: 24px;
+    border: none;
+    background: transparent;
+  }
+
+  .nav__menu-btn__black:hover {
+    cursor: pointer;
+  }
+
+  .nav__menu-btn:hover {
+    cursor: pointer;
+  }
 }

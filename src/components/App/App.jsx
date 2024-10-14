@@ -58,6 +58,10 @@ function App() {
     //   });
   };
 
+  const handleHamburgerClick = () => {
+    console.log("this is the nav menu for mobile screen size");
+  };
+
   useEffect(() => {
     if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
 
@@ -83,9 +87,19 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Main handleLoginClick={handleLoginClick} />}
+              element={
+                <Main
+                  handleHamburgerClick={handleHamburgerClick}
+                  handleLoginClick={handleLoginClick}
+                />
+              }
             ></Route>
-            <Route path="/saved-news" element={<SavedNews />}></Route>
+            <Route
+              path="/saved-news"
+              element={
+                <SavedNews handleHamburgerClick={handleHamburgerClick} />
+              }
+            ></Route>
           </Routes>
           <Footer />
           <LoginModal

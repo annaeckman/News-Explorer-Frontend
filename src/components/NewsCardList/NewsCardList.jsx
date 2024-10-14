@@ -2,12 +2,14 @@ import "../NewsCardList/NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 import { useState } from "react";
 import notFound from "../../assets/not-found.png";
-import searchForNews from "../../assets/search-for-news.png";
 import Preloader from "../Preloader/Preloader";
 
 // i need to hide the button when all 100 items are shown
 
 function NewsCardList({ newsData, isSuccess, isLoading, isError }) {
+  newsData = newsData.filter((article) => article.title !== "[Removed]");
+  //filter out articles that say "removed"
+
   const [activeNewsDataLength, setActiveNewsDataLength] = useState(3);
   const activeNewsDataItems = newsData.slice(0, activeNewsDataLength);
 
@@ -17,8 +19,6 @@ function NewsCardList({ newsData, isSuccess, isLoading, isError }) {
 
   const isInitialState = newsData.length === 0 && !isSuccess && !isError;
   const emptyNewsDataArray = newsData.length === 0 && isSuccess;
-
-  // option to: render entire preloader conditionally based on isLoading state! don't deal with css ha!
 
   return (
     <section

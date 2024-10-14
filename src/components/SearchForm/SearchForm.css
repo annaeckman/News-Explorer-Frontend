@@ -57,3 +57,26 @@
     width: 160px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .search__form-container {
+    padding: 122px 0 32px;
+  }
+
+  .search__input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .search__input {
+    width: 265px;
+    height: 36px;
+    padding: 10px;
+  }
+
+  .search__submit-button {
+    position: unset;
+    width: 285px;
+    height: 56px;
+  }
+}
