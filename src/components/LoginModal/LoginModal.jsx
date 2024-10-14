@@ -23,7 +23,7 @@ const LoginModal = ({
     <ModalWithForm
       title="Sign in"
       buttonText={isLoading ? "Signing in" : "Sign in"}
-      altButtonText={"or Sign up"}
+      altButtonText={"Sign up"}
       altButtonClick={() => setActiveModal("register")}
       isOpen={isOpen}
       onClose={onClose}

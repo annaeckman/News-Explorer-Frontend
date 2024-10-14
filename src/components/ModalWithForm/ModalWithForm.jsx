@@ -42,7 +42,7 @@ function ModalWithForm({
               type="button"
               onClick={altButtonClick}
             >
-              {altButtonText}
+              <span className="modal__or">or</span> {altButtonText}
             </button>
           </div>
         </form>

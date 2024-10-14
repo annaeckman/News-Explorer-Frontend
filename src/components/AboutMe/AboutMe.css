@@ -4,6 +4,7 @@
   justify-content: center;
   gap: 32px;
   padding: 40px 40px 61px;
+  align-items: center;
 }
 
 .about__selfie-container {
@@ -33,4 +34,11 @@
   line-height: 24px;
   text-align: left;
   max-width: 600px;
+}
+
+@media screen and (max-width: 850px) {
+  .about__selfie-container {
+    height: 232px;
+    width: 232px;
+  }
 }

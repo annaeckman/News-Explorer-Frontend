@@ -116,3 +116,18 @@
   padding-top: 180px;
   margin: 0;
 }
+
+@media screen and (max-width: 850px) {
+  .news-cards-list__list {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 32px;
+  }
+  .news-cards-list__title {
+    padding-top: 40px;
+    padding-left: 40px;
+  }
+  .news-cards-list__title {
+    font-size: 30px;
+  }
+}

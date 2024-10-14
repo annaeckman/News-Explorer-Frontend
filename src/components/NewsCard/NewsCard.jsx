@@ -2,25 +2,12 @@ import "../NewsCard/NewsCard.css";
 
 function NewsCard({ article }) {
   const source = article.source.name.toUpperCase().split(".")[0];
-  const dateInNumbers = article.publishedAt.split("T")[0].split("-");
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const dateInWords = new Date(article.publishedAt).toLocaleString("default", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
-  const dateInWords = `${months[dateInNumbers[1]]} ${dateInNumbers[2]}, ${
-    dateInNumbers[0]
-  }`;
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">

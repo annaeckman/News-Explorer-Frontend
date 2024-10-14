@@ -14,7 +14,7 @@
 
 .nav[data-theme="light"] {
   --primary: black;
-  --border: rgba(255, 255, 255, 0.3);
+  --border: #d1d2d6;
 }
 
 .nav__logo {
@@ -42,7 +42,7 @@
   height: 40px;
   border-radius: 100px;
   background: none;
-  font-family: "Roboto";
+  font-family: "Roboto-500";
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -50,7 +50,8 @@
   border-style: solid;
   border-width: 1px;
   color: var(--primary);
-  border-color: (var(--primary));
+  border-color: (var(--border));
+  padding: 0;
 }
 
 .nav__signin-btn:hover {
@@ -58,7 +59,7 @@
 }
 
 .nav__link {
-  font-family: "Roboto";
+  font-family: "Roboto-500";
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;

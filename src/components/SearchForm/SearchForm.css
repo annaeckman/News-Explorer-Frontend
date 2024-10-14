@@ -39,4 +39,21 @@
   padding: 0;
   border: none;
   color: #fff;
+  font-family: "Roboto";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+@media screen and (max-width: 850px) {
+  .search__input {
+    width: 452px;
+    height: 56px;
+  }
+
+  .search__submit-button {
+    height: 56px;
+    width: 160px;
+  }
 }
