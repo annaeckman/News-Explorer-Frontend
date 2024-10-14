@@ -35,3 +35,9 @@
   text-align: center;
   color: #1a1b22;
 }
+
+@media screen and (max-width: 850px) {
+  .footer {
+    padding: 18px 40px;
+  }
+}
