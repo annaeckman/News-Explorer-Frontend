@@ -18,13 +18,15 @@ function NewsCard({ article, isLoggedIn }) {
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
-        <div className="news-card__sign-in-btn news-card__sign-in-btn_hidden">
+        <div
+          className={"news-card__sign-in-icon news-card__sign-in-icon_hidden"}
+        >
           Sign in to save articles
         </div>
         {/* add logic to above button class that uses usercontext context 
         to remove the hidden class or not and enable the save button */}
         <button
-          {...(isLoggedIn ? disabled : "")}
+          disabled={!isLoggedIn}
           className={
             isClicked
               ? "news-card__save_active news-card__save"
@@ -38,7 +40,7 @@ function NewsCard({ article, isLoggedIn }) {
           className="news-card__image"
         />
       </div>
-      {/* use aria disabled to make this stupid button more accessible and 
+      {/* use aria disabled to make this button more accessible and 
       not completely disappear when it is native disabled
       make save button & icon it's own component */}
       <div className="news-card__text">

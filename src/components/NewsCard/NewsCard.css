@@ -93,7 +93,7 @@
   background-image: url("../../assets/saved_clicked.png");
 }
 
-.news-card__sign-in-btn {
+.news-card__sign-in-icon {
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -112,7 +112,7 @@
   border-radius: 10px;
 }
 
-.news-card__sign-in-btn_hidden {
+.news-card__sign-in-icon_hidden {
   visibility: hidden;
 }
 
