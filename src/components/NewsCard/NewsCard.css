@@ -134,7 +134,7 @@
   }
   .news-card__description {
     margin: 0 16px;
-    max-height: 108px;
+    max-height: 88px;
     overflow: hidden;
   }
   .news-card__source {
@@ -146,7 +146,7 @@
 @media screen and (max-width: 450px) {
   .news-card__container {
     height: 440px;
-    width: 350px;
+    width: 288px;
   }
   .news-card__image-container {
     height: 196px;

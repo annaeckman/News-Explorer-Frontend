@@ -3,15 +3,23 @@ import NavLoggedIn from "../NavLoggedIn/NavLoggedIn";
 import NavLoggedOut from "../NavLoggedOut/NavLoggedOut";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Nav({ handleLoginClick, isInverse, handleHamburgerClick }) {
-  const isLoggedIn = false;
+function Nav({
+  handleLoginClick,
+  isInverse,
+  handleHamburgerClick,
+  isLoggedIn,
+}) {
+  //build handler for hamburger button
+  //build ham menu in nav
 
   return (
     <nav className="nav" data-theme={isInverse ? "light" : "dark"}>
       <p className="nav__logo">NewsExplorer</p>
       <button
         onClick={handleHamburgerClick}
-        className={isInverse ? "nav__menu-btn--black" : "nav__menu-btn"}
+        className={
+          isInverse ? "nav__menu-btn nav__menu-btn--black" : "nav__menu-btn"
+        }
       ></button>
       {!isLoggedIn ? (
         <NavLoggedOut handleLoginClick={handleLoginClick} />

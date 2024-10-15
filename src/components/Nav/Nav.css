@@ -127,15 +127,10 @@
   }
 
   .nav__menu-btn--black {
-    display: block;
     background-image: url("../../assets/menu-black.png");
-    height: 24px;
-    width: 24px;
-    border: none;
-    background: transparent;
   }
 
-  .nav__menu-btn__black:hover {
+  .nav__menu-btn--black:hover {
     cursor: pointer;
   }
 

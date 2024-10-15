@@ -1,9 +1,23 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../utils/UseFormAndValidation";
 
-const RegisterModal = ({ isOpen, onClose, isLoading, setActiveModal }) => {
+const RegisterModal = ({
+  isOpen,
+  onClose,
+  isLoading,
+  setActiveModal,
+  handleRegistration,
+}) => {
   const { values, handleChange, isValid, resetForm, errors } =
     useFormAndValidation();
+
+  const handleSubmit = () => {
+    handleRegistration(values, resetCurrentForm);
+  };
+
+  const resetCurrentForm = () => {
+    resetForm({ email: "", password: "", username: "" });
+  };
 
   return (
     <ModalWithForm
@@ -14,6 +28,7 @@ const RegisterModal = ({ isOpen, onClose, isLoading, setActiveModal }) => {
       isOpen={isOpen}
       onClose={onClose}
       formValid={isValid}
+      onSubmit={handleSubmit}
     >
       <label className="modal__label" htmlFor="email-login-register">
         Email

@@ -134,8 +134,8 @@
 
 @media screen and (max-width: 450px) {
   .news-cards-list__list {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 0;
+    padding-right: 0;
     margin-top: 58px;
   }
   .news-cards-list__list {
