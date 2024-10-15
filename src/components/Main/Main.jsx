@@ -61,6 +61,7 @@ function Main({ handleLoginClick, handleHamburgerClick, isLoggedIn }) {
         isSuccess={isSuccess}
         isLoading={isLoading}
         isError={isError}
+        isLoggedIn={isLoggedIn}
       />
       <AboutMe />
     </main>

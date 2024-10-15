@@ -89,6 +89,10 @@
   background-image: url("../../assets/saved_hover.png");
 }
 
+.news-card__save_active {
+  background-image: url("../../assets/saved_clicked.png");
+}
+
 .news-card__sign-in-btn {
   border: none;
   background-color: transparent;

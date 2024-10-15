@@ -1,16 +1,21 @@
 import "../Nav/Nav.css";
 import NavLoggedIn from "../NavLoggedIn/NavLoggedIn";
 import NavLoggedOut from "../NavLoggedOut/NavLoggedOut";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
+import { useState } from "react";
 
-function Nav({
-  handleLoginClick,
-  isInverse,
-  handleHamburgerClick,
-  isLoggedIn,
-}) {
+function Nav({ handleLoginClick, isInverse, isLoggedIn }) {
+  const [isClicked, setIsClicked] = useState(false);
   //build handler for hamburger button
   //build ham menu in nav
+
+  const handleHamburgerClick = () => {
+    setIsClicked(true);
+  };
+
+  const handleHamburgerCloseClick = () => {
+    setIsClicked(false);
+  };
 
   return (
     <nav className="nav" data-theme={isInverse ? "light" : "dark"}>
@@ -21,11 +26,19 @@ function Nav({
           isInverse ? "nav__menu-btn nav__menu-btn--black" : "nav__menu-btn"
         }
       ></button>
+
       {!isLoggedIn ? (
         <NavLoggedOut handleLoginClick={handleLoginClick} />
       ) : (
         <NavLoggedIn isInverse={isInverse} />
       )}
+      {isClicked ? (
+        <HamburgerMenu
+          isLoggedIn={isLoggedIn}
+          onClose={handleHamburgerCloseClick}
+          handleLoginClick={handleLoginClick}
+        />
+      ) : null}
     </nav>
   );
 }
@@ -33,6 +46,5 @@ function Nav({
 export default Nav;
 
 // Stil to do:
-// for mobile, have classes that hide or show in media queries for mobile
 // add onClick to signout button
 // add the little bar that follows the border, depending on what page you're on

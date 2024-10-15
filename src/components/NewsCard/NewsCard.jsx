@@ -1,12 +1,19 @@
+import { useState } from "react";
 import "../NewsCard/NewsCard.css";
 
-function NewsCard({ article }) {
+function NewsCard({ article, isLoggedIn }) {
   const source = article.source.name.toUpperCase().split(".")[0];
   const dateInWords = new Date(article.publishedAt).toLocaleString("default", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleSaveClick = () => {
+    isClicked === true ? setIsClicked(false) : setIsClicked(true);
+  };
 
   return (
     <div className="news-card__container">
@@ -16,7 +23,15 @@ function NewsCard({ article }) {
         </div>
         {/* add logic to above button class that uses usercontext context 
         to remove the hidden class or not and enable the save button */}
-        <button disabled className="news-card__save"></button>
+        <button
+          {...(isLoggedIn ? disabled : "")}
+          className={
+            isClicked
+              ? "news-card__save_active news-card__save"
+              : "news-card__save"
+          }
+          onClick={handleSaveClick}
+        ></button>
         <img
           src={article.urlToImage}
           alt={article.title}
