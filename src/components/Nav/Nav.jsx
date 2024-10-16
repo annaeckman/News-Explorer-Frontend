@@ -4,7 +4,7 @@ import NavLoggedOut from "../NavLoggedOut/NavLoggedOut";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import { useState } from "react";
 
-function Nav({ handleLoginClick, isInverse, isLoggedIn }) {
+function Nav({ handleLoginClick, isInverse, isLoggedIn, handleLogout }) {
   const [isClicked, setIsClicked] = useState(false);
   //build handler for hamburger button
   //build ham menu in nav
@@ -30,7 +30,7 @@ function Nav({ handleLoginClick, isInverse, isLoggedIn }) {
       {!isLoggedIn ? (
         <NavLoggedOut handleLoginClick={handleLoginClick} />
       ) : (
-        <NavLoggedIn isInverse={isInverse} />
+        <NavLoggedIn isInverse={isInverse} handleLogout={handleLogout} />
       )}
       {isClicked ? (
         <HamburgerMenu

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function NavLoggedIn({ isInverse }) {
+function NavLoggedIn({ isInverse, handleLogout }) {
   const signoutBtnClass = !isInverse
     ? "nav__signout-btn nav__signout-btn--white"
     : "nav__signout-btn";
@@ -20,7 +20,7 @@ function NavLoggedIn({ isInverse }) {
       <li className="nav__list-item">
         <div className="nav__signout-div">
           <p className="nav__signout-name">Elise</p>
-          <button className={signoutBtnClass}></button>
+          <button onClick={handleLogout} className={signoutBtnClass}></button>
         </div>
       </li>
     </ul>

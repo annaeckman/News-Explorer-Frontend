@@ -13,6 +13,7 @@ function NewsCard({ article, isLoggedIn }) {
 
   const handleSaveClick = () => {
     isClicked === true ? setIsClicked(false) : setIsClicked(true);
+    // add logic to add saved article to currentUser state...?
   };
 
   return (
@@ -26,7 +27,7 @@ function NewsCard({ article, isLoggedIn }) {
         {/* add logic to above button class that uses usercontext context 
         to remove the hidden class or not and enable the save button */}
         <button
-          disabled={!isLoggedIn}
+          {...(isLoggedIn ? disabled : "")}
           className={
             isClicked
               ? "news-card__save_active news-card__save"

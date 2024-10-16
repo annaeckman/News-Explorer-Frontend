@@ -4,12 +4,13 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SavedNewsHeader() {
   const { currentUser } = useContext(CurrentUserContext);
+  console.log(currentUser);
 
   return (
     <section className="saved-news-header">
       <h3 className="saved-news-header__title">Saved articles</h3>
       <p className="saved-news-header__subtitle">
-        {currentUser.username}, you have {currentUser.savedNews.length} saved
+        {currentUser?.username}, you have {currentUser?.savedNews.length} saved
       </p>
       <p className="saved-news-header__keywords">
         By keywords:{" "}

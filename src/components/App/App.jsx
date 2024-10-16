@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "./App.css";
 
@@ -8,15 +8,30 @@ import Footer from "../Footer/Footer";
 import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { authorize, checkToken } from "../../utils/auth";
 import { getToken, setToken, removeToken } from "../../utils/token";
+import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({
+    loggedIn: false,
+    email: "",
+    password: "",
+    username: "",
+    savedNews: stubbedSavedNewsList,
+    savedKeywords: [],
+  });
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+
+  const userContext = {
+    currentUser,
+    setCurrentUser,
+  };
 
   const handleLoginClick = () => {
     setActiveModal("login");
@@ -52,7 +67,7 @@ function App() {
         return checkToken(res.token);
       })
       .then((user) => {
-        setCurrentUser(user);
+        // setCurrentUser(user);
         setIsLoggedIn(true);
         closeActiveModal();
         resetLoginForm();
@@ -63,6 +78,7 @@ function App() {
   };
 
   const handleLogout = () => {
+    console.log("logout buton was clicked!");
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
@@ -74,10 +90,9 @@ function App() {
   };
 
   useEffect(() => {
-    if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
+    if (!activeModal) return;
 
     const handleEscClose = (e) => {
-      // define the function inside useEffect not to lose the reference on rerendering
       if (e.key === "Escape") {
         closeActiveModal();
       }
@@ -86,14 +101,13 @@ function App() {
     document.addEventListener("keydown", handleEscClose);
 
     return () => {
-      // don't forget to add a clean up function for removing the listener
       document.removeEventListener("keydown", handleEscClose);
     };
-  }, [activeModal]); // watch activeModal here
+  }, [activeModal]);
 
   return (
     <div className="app">
-      <CurrentUserContext.Provider value={currentUser}>
+      <CurrentUserContext.Provider value={userContext}>
         <div className="app__content">
           <Routes>
             <Route
@@ -103,6 +117,7 @@ function App() {
                   handleHamburgerClick={handleHamburgerClick}
                   handleLoginClick={handleLoginClick}
                   isLoggedIn={isLoggedIn}
+                  handleLogout={handleLogout}
                 />
               }
             ></Route>
@@ -112,6 +127,8 @@ function App() {
                 <SavedNews
                   handleHamburgerClick={handleHamburgerClick}
                   isLoggedIn={isLoggedIn}
+                  currentUser={currentUser}
+                  handleLogout={handleLogout}
                 />
               }
             ></Route>
