@@ -6,7 +6,7 @@ import Preloader from "../Preloader/Preloader";
 
 // i need to hide the button when all 100 items are shown
 
-function NewsCardList({ newsData, isSuccess, isLoading, isError }) {
+function NewsCardList({ newsData, isSuccess, isLoading, isError, isLoggedIn }) {
   newsData = newsData.filter((article) => article.title !== "[Removed]");
   //filter out articles that say "removed"
 
@@ -61,7 +61,11 @@ function NewsCardList({ newsData, isSuccess, isLoading, isError }) {
       <div className="news-cards-list__container">
         <ul className="news-cards-list__list">
           {activeNewsDataItems.map((article) => (
-            <NewsCard key={article.url} article={article} />
+            <NewsCard
+              isLoggedIn={isLoggedIn}
+              key={article.url}
+              article={article}
+            />
           ))}
         </ul>
       </div>

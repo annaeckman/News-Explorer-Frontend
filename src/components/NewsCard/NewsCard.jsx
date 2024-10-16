@@ -18,34 +18,31 @@ function NewsCard({ article, isLoggedIn }) {
     // add logic to add saved article to currentUser state...?
   };
 
+  console.log(isLoggedIn);
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
-        <div
-          className={"news-card__sign-in-icon news-card__sign-in-icon_hidden"}
-        >
-          Sign in to save articles
+        {location.pathname === "/saved-news" && (
+          <div className="news-card__keyword-icon">Nature</div>
+        )}
+        <div className="news-card__btns">
+          <div className="news-card__sign-in-icon">
+            Sign in to save articles
+          </div>
+
+          <button
+            disabled={!isLoggedIn}
+            className={
+              isClicked
+                ? "news-card__save_active news-card__save"
+                : "news-card__save"
+            }
+            onClick={handleSaveClick}
+          ></button>
+          {location.pathname === "/saved-news" && (
+            <button className="news-card__delete"></button>
+          )}
         </div>
-        {/* add logic to above button class that uses usercontext context 
-        to remove the hidden class or not and enable the save button */}
-        <div
-          className={
-            location.pathname === "/saved-news"
-              ? "news-card__keyword-icon"
-              : "news-card__keyword-icon_hidden"
-          }
-        >
-          Nature
-        </div>
-        <button
-          {...(isLoggedIn ? disabled : "")}
-          className={
-            isClicked
-              ? "news-card__save_active news-card__save"
-              : "news-card__save"
-          }
-          onClick={handleSaveClick}
-        ></button>
         <img
           src={article.urlToImage}
           alt={article.title}

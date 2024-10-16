@@ -15,6 +15,7 @@ export const stubbedSavedNewsList = [
     publishedAt: "2024-10-05T10:00:05Z",
     content:
       "Two papers published this week showcase the perplexing origins and potential uses of antimatter, a type of matter that flips the rules governing ordinary matter onto their heads.\r\nOne paper, publishe… [+4956 chars]",
+    keyword: "nature",
   },
   {
     source: {

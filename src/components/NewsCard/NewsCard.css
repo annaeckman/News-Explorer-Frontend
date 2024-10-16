@@ -113,7 +113,31 @@
   background-image: url("../../assets/saved_clicked.png");
 }
 
+.news-card__delete {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  height: 40px;
+  width: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0;
+  background-image: url("../../assets/card-delete.png");
+}
+
+.news-card__delete:hover {
+  background-image: url("../../assets/trash-hover.svg");
+}
+
+.news-card__delete_hidden {
+  display: none;
+}
+
 .news-card__sign-in-icon {
+  visibility: hidden;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -124,16 +148,16 @@
   width: 182px;
   color: #000;
   background-color: #fff;
-  font-family: "Roboto";
+  font-family: "Roboto-500";
   font-size: 12px;
   font-weight: 500;
-  line-height: 14.06px;
+  line-height: 40px;
   text-align: center;
   border-radius: 10px;
 }
 
-.news-card__sign-in-icon_hidden {
-  visibility: hidden;
+.news-card__btns:hover .news-card__sign-in-icon {
+  visibility: visible;
 }
 
 @media screen and (max-width: 850px) {

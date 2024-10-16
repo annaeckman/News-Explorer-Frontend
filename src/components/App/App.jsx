@@ -21,7 +21,6 @@ function App() {
     password: "",
     username: "",
     savedNews: stubbedSavedNewsList,
-    savedKeywords: [],
   });
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
