@@ -70,6 +70,26 @@
   color: #b6bcbf;
 }
 
+.news-card__keyword-icon {
+  background-color: #fff;
+  height: 40px;
+  width: 87px;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  border-radius: 10px;
+  color: #000;
+  font-family: "Roboto-500";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 35px;
+  text-align: center;
+}
+
+.news-card__keyword-icon_hidden {
+  display: none;
+}
+
 .news-card__save {
   border: none;
   background-color: transparent;

@@ -3,6 +3,7 @@ import NavLoggedIn from "../NavLoggedIn/NavLoggedIn";
 import NavLoggedOut from "../NavLoggedOut/NavLoggedOut";
 
 function HamburgerMenu({ isLoggedIn, onClose, handleLoginClick, isInverse }) {
+  console.log(isLoggedIn);
   return (
     <div className="hamburger-menu">
       <div className="hamburger-menu__top">
@@ -15,10 +16,10 @@ function HamburgerMenu({ isLoggedIn, onClose, handleLoginClick, isInverse }) {
       </div>
 
       <div className="hamburger-menu__links">
-        {!isLoggedIn ? (
-          <NavLoggedOut handleLoginClick={handleLoginClick} />
-        ) : (
+        {isLoggedIn ? (
           <NavLoggedIn isInverse={isInverse} />
+        ) : (
+          <NavLoggedOut handleLoginClick={handleLoginClick} />
         )}
       </div>
     </div>

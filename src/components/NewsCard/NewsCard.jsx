@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "../NewsCard/NewsCard.css";
+import { useLocation } from "react-router-dom";
 
 function NewsCard({ article, isLoggedIn }) {
+  const location = useLocation();
   const source = article.source.name.toUpperCase().split(".")[0];
   const dateInWords = new Date(article.publishedAt).toLocaleString("default", {
     year: "numeric",
@@ -26,6 +28,15 @@ function NewsCard({ article, isLoggedIn }) {
         </div>
         {/* add logic to above button class that uses usercontext context 
         to remove the hidden class or not and enable the save button */}
+        <div
+          className={
+            location.pathname === "/saved-news"
+              ? "news-card__keyword-icon"
+              : "news-card__keyword-icon_hidden"
+          }
+        >
+          Nature
+        </div>
         <button
           {...(isLoggedIn ? disabled : "")}
           className={
