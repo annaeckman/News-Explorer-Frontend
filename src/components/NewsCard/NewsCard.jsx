@@ -18,7 +18,6 @@ function NewsCard({ article, isLoggedIn }) {
     // add logic to add saved article to currentUser state...?
   };
 
-  console.log(isLoggedIn);
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
@@ -30,15 +29,17 @@ function NewsCard({ article, isLoggedIn }) {
             Sign in to save articles
           </div>
 
-          <button
-            disabled={!isLoggedIn}
-            className={
-              isClicked
-                ? "news-card__save_active news-card__save"
-                : "news-card__save"
-            }
-            onClick={handleSaveClick}
-          ></button>
+          {location.pathname === "/" && (
+            <button
+              disabled={!isLoggedIn}
+              className={
+                isClicked
+                  ? "news-card__save_active news-card__save"
+                  : "news-card__save"
+              }
+              onClick={handleSaveClick}
+            ></button>
+          )}
           {location.pathname === "/saved-news" && (
             <button className="news-card__delete"></button>
           )}
