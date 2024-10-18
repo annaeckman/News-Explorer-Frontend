@@ -1,0 +1,64 @@
+.header {
+  background-image: url("../../assets/home-background.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 30px 104px 26px 104px;
+}
+
+.header__logo-container {
+  max-width: 200px;
+}
+
+.header__text-container {
+  margin: 0 auto;
+  max-width: 608px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__title {
+  font-size: 60px;
+  font-family: "Roboto-Slab-reg";
+  font-weight: 400;
+  line-height: 64px;
+  color: #fff;
+  margin: 0;
+  padding-top: 38px;
+}
+
+.header__subtitle {
+  margin: 0;
+  color: #fff;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  padding-top: 32px;
+}
+
+.header__logo {
+  font-family: "Roboto-Slab", "Inter";
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+}
+
+@media screen and (max-width: 850px) {
+  .header__title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 16px 19px;
+  }
+
+  .header__title {
+    width: 285px;
+    padding-top: 30px;
+  }
+}
