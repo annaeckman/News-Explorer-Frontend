@@ -13,6 +13,16 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { authorize, checkToken } from "../../utils/auth";
 import { getToken, setToken, removeToken } from "../../utils/token";
 import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
+import { getNews } from "../../utils/newsapi";
+import { APIkey } from "../../utils/constants";
+import {
+  currentYear,
+  currentMonth,
+  currentDay,
+  lastWeekYear,
+  lastWeekMonth,
+  lastWeekDay,
+} from "../../utils/Dates";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -24,12 +34,38 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [newsData, setNewsData] = useState([]);
+  const [currentKeyword, setCurrentKeyword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const navigate = useNavigate();
 
   const userContext = {
     currentUser,
     setCurrentUser,
+  };
+
+  const handleSearchSubmit = () => {
+    const to = `${currentYear}-${currentMonth}-${currentDay}`;
+    const from = `${lastWeekYear}-${lastWeekMonth}-${lastWeekDay}`;
+
+    setIsLoading(true);
+    setNewsData([]);
+    setIsSuccess(false);
+    setIsError(false);
+
+    getNews(currentKeyword, APIkey, from, to)
+      .then((data) => {
+        setIsLoading(false);
+        setIsSuccess(true);
+        setNewsData(data.articles);
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsError(true);
+      });
   };
 
   const handleLoginClick = () => {
@@ -117,6 +153,12 @@ function App() {
                   handleLoginClick={handleLoginClick}
                   isLoggedIn={isLoggedIn}
                   handleLogout={handleLogout}
+                  handleSearchSubmit={handleSearchSubmit}
+                  newsData={newsData}
+                  isSuccess={isSuccess}
+                  isLoading={isLoading}
+                  isError={isError}
+                  setCurrentKeyword={setCurrentKeyword}
                 />
               }
             ></Route>
