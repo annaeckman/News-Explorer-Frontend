@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   background-color: #1a1b22;
-  width: 100vw;
+  width: 100%;
   height: 230px;
   margin: 0;
 }
@@ -56,9 +56,36 @@
   position: relative;
 }
 
-.hamburger-menu-btn {
+.hamburger-menu__link {
+  font-family: "Roboto-500";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--primary);
+  margin-left: 16px;
+}
+
+.hamburger-menu__signin-btn {
   position: absolute;
-  left: 50%;
+  left: 25%;
   width: 288px;
   height: 56px;
+  border-radius: 100px;
+  background: none;
+  font-family: "Roboto-500";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  color: var(--primary);
+  border-color: (var(--border));
+  padding-top: 0;
+  margin-top: 22px;
+}
+
+.hamburger-menu__list {
 }
