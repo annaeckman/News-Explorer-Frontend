@@ -170,4 +170,8 @@
 
   .modal__close {
   }
+
+  .modal__submit {
+    width: 288px;
+  }
 }

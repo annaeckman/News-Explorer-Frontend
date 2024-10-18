@@ -37,6 +37,7 @@ function Nav({ handleLoginClick, isInverse, isLoggedIn, handleLogout }) {
           isLoggedIn={isLoggedIn}
           onClose={handleHamburgerCloseClick}
           handleLoginClick={handleLoginClick}
+          handleLogout={handleLogout}
         />
       ) : null}
     </nav>

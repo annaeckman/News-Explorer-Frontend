@@ -56,6 +56,18 @@
   position: relative;
 }
 
+.hamburger-menu__list {
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin-left: 16px;
+}
+
+.hamburger-menu__item {
+  padding: 0;
+}
+
 .hamburger-menu__link {
   font-family: "Roboto-500";
   font-size: 18px;
@@ -64,12 +76,14 @@
   text-align: center;
   text-decoration: none;
   color: var(--primary);
-  margin-left: 16px;
+  padding: 0;
+}
+
+.hamburger-menu__link_loggedin {
+  padding: 25px;
 }
 
 .hamburger-menu__signin-btn {
-  position: absolute;
-  left: 25%;
   width: 288px;
   height: 56px;
   border-radius: 100px;
@@ -84,8 +98,13 @@
   color: var(--primary);
   border-color: (var(--border));
   padding-top: 0;
-  margin-top: 22px;
+  margin: 22px auto;
 }
 
-.hamburger-menu__list {
+.hamburger-menu__signout-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 40px;
+  padding-left: 230px;
 }
