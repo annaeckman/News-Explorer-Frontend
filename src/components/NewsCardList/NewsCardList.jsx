@@ -22,14 +22,18 @@ function NewsCardList({ newsData, isSuccess, isLoading, isError, isLoggedIn }) {
 
   return (
     <section
-      className={isInitialState ? "news-cards-list_hidden" : "news-cards-list"}
+      className={
+        isInitialState
+          ? " news-cards-list news-cards-list_hidden"
+          : "news-cards-list"
+      }
     >
       {/* Not Found: */}
       <div
         className={
           emptyNewsDataArray
             ? "news-cards-list__not-found"
-            : "news-cards-list__not-found_hidden"
+            : "news-cards-list__not-found news-cards-list__not-found_hidden"
         }
       >
         <img

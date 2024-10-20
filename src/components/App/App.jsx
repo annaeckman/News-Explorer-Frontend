@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import SuccessModal from "../SuccessModal/SuccessModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { authorize, checkToken } from "../../utils/auth";
@@ -85,6 +86,7 @@ function App() {
         setCurrentUser(res.data);
         resetRegistrationForm();
         closeActiveModal();
+        setActiveModal("success");
       })
       .catch((res) => {
         console.log(`There is an error in handleUserRegistration: ${res}`);
@@ -186,6 +188,11 @@ function App() {
             onClose={closeActiveModal}
             setActiveModal={setActiveModal}
             handleRegistration={handleRegistration}
+          />
+          <SuccessModal
+            isOpen={activeModal === "success"}
+            onClose={closeActiveModal}
+            setActiveModal={setActiveModal}
           />
         </div>
       </CurrentUserContext.Provider>
