@@ -21,7 +21,7 @@ function Main({
   };
 
   return (
-    <main className="main">
+    <>
       <Header
         handleSearchSubmit={handleSearchSubmit}
         handleChange={handleChange}
@@ -30,15 +30,17 @@ function Main({
         isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
       />
-      <NewsCardsList
-        newsData={newsData}
-        isSuccess={isSuccess}
-        isLoading={isLoading}
-        isError={isError}
-        isLoggedIn={isLoggedIn}
-      />
-      <AboutMe />
-    </main>
+      <main className="main">
+        <NewsCardsList
+          newsData={newsData}
+          isSuccess={isSuccess}
+          isLoading={isLoading}
+          isError={isError}
+          isLoggedIn={isLoggedIn}
+        />
+        <AboutMe />
+      </main>
+    </>
   );
 }
 

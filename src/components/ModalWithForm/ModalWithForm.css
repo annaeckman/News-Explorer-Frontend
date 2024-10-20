@@ -169,6 +169,10 @@
   }
 
   .modal__close {
+    top: -38px;
+    left: 285px;
+    height: 24px;
+    width: 24px;
   }
 
   .modal__submit {

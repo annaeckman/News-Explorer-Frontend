@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: solid;
+  padding-bottom: 26px;
   border-color: var(--border);
 }
 
@@ -21,7 +22,7 @@
   font-family: "Roboto-Slab";
   font-size: 20px;
   font-weight: 700;
-  margin: none;
+  margin: 0;
   color: var(--primary);
 }
 
@@ -39,11 +40,12 @@
   gap: 42px;
   align-items: center;
   list-style: none;
+  margin: 0;
 }
 
 .nav__signin-btn {
-  width: 152px;
-  height: 40px;
+  width: 176px;
+  height: 48px;
   border-radius: 100px;
   background: none;
   font-family: "Roboto-500";
@@ -112,6 +114,16 @@
   background-image: url("../../assets/logout-white.png");
 }
 
+@media screen and (max-width: 768px) {
+  .nav__link {
+    font-size: 16px;
+  }
+
+  .nav__signin-btn {
+    font-size: 16px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .nav__list {
     display: none;
@@ -140,4 +152,7 @@
 }
 
 @media screen and (max-width: 400px) {
+  .nav {
+    padding-bottom: 16px;
+  }
 }

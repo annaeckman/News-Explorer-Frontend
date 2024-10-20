@@ -163,7 +163,7 @@
 @media screen and (max-width: 850px) {
   .news-card__container {
     height: 420px;
-    width: 224px;
+    width: 222px;
     gap: 8px;
   }
 
@@ -204,10 +204,23 @@
 
 @media screen and (max-width: 450px) {
   .news-card__container {
-    height: 440px;
-    width: 288px;
+    height: 438px;
+    width: 286px;
   }
   .news-card__image-container {
     height: 196px;
+  }
+  .news-card__save {
+    right: 16px;
+    top: 16px;
+  }
+
+  .news-card__delete {
+    right: 16px;
+    top: 16px;
+  }
+  .news-card__keyword-icon {
+    left: 16px;
+    top: 16px;
   }
 }

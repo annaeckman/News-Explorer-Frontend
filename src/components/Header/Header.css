@@ -3,7 +3,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 30px 104px 26px 104px;
+  padding: 30px 104px 0 104px;
 }
 
 .header__logo-container {
@@ -45,20 +45,28 @@
   color: #fff;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 800px) {
   .header__title {
     font-size: 36px;
     line-height: 40px;
+  }
+
+  .header {
+    padding: 23px 40px 18px 40px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .header {
-    padding: 16px 19px;
+    padding: 16px 16px 0 16px;
   }
 
   .header__title {
     width: 285px;
     padding-top: 30px;
+  }
+
+  .header__subtitle {
+    padding-top: 16px;
   }
 }
