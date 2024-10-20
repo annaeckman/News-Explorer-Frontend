@@ -6,6 +6,7 @@
   border-bottom: solid;
   padding-bottom: 26px;
   border-color: var(--border);
+  position: relative;
 }
 
 .nav[data-theme="dark"] {
@@ -72,6 +73,13 @@
   text-align: center;
   text-decoration: none;
   color: var(--primary);
+}
+
+.nav__link_focused {
+  border-bottom: solid;
+  border-color: (var(--primary));
+  padding-bottom: 38px;
+  border-width: 3px;
 }
 
 .nav__signout-div {
