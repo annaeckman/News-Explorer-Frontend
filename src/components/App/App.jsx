@@ -52,6 +52,11 @@ function App() {
     const to = `${currentYear}-${currentMonth}-${currentDay}`;
     const from = `${lastWeekYear}-${lastWeekMonth}-${lastWeekDay}`;
 
+    if (currentKeyword === "") {
+      setIsSuccess(true);
+      return;
+    }
+
     setIsLoading(true);
     setNewsData([]);
     setIsSuccess(false);

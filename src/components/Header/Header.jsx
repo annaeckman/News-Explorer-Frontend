@@ -10,15 +10,19 @@ function Header({
   isLoggedIn,
   handleLogout,
 }) {
+  const isInverse = false;
+
   return (
-    <header className="header">
-      <Nav
-        handleLoginClick={handleLoginClick}
-        isInverse={false}
-        handleHamburgerClick={handleHamburgerClick}
-        isLoggedIn={isLoggedIn}
-        handleLogout={handleLogout}
-      />
+    <header className="header" data-theme={isInverse ? "light" : "dark"}>
+      <div className="header__nav-container">
+        <Nav
+          handleLoginClick={handleLoginClick}
+          isInverse={false}
+          handleHamburgerClick={handleHamburgerClick}
+          isLoggedIn={isLoggedIn}
+          handleLogout={handleLogout}
+        />
+      </div>
       <div className="header__text-container">
         <h1 className="header__title">What's going on in the world?</h1>
         <h2 className="header__subtitle">

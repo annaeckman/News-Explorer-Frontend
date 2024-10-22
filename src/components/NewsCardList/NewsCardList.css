@@ -52,6 +52,7 @@
 
 .news-cards-list__more-button:hover {
   background-color: #e8e8e8;
+  opacity: 0.8;
   cursor: pointer;
 }
 

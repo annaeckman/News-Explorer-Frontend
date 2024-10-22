@@ -3,10 +3,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid;
-  padding-bottom: 26px;
-  border-color: var(--border);
   position: relative;
+  padding: 19px 104px 0 104px;
 }
 
 .nav[data-theme="dark"] {
@@ -38,10 +36,11 @@
 .nav__list {
   display: flex;
   flex-direction: row;
-  gap: 42px;
+  gap: 32px;
   align-items: center;
   list-style: none;
   margin: 0;
+  padding-inline-start: 0;
 }
 
 .nav__signin-btn {
@@ -78,7 +77,9 @@
 .nav__link_focused {
   border-bottom: solid;
   border-color: (var(--primary));
-  padding-bottom: 38px;
+  padding-bottom: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-width: 3px;
 }
 
@@ -132,7 +133,11 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
+  .nav {
+    padding: 23px 40px 18px 40px;
+  }
+
   .nav__list {
     display: none;
   }
@@ -161,6 +166,6 @@
 
 @media screen and (max-width: 400px) {
   .nav {
-    padding-bottom: 16px;
+    padding: 16px 16px 0 16px;
   }
 }

@@ -52,7 +52,7 @@ function NewsCardList({ newsData, isSuccess, isLoading, isError, isLoggedIn }) {
         className={
           isLoading
             ? "news-cards-list__preloader"
-            : "news-cards-list__preloader_hidden"
+            : "news-cards-list__preloader news-cards-list__preloader_hidden"
         }
       >
         <Preloader />

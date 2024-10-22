@@ -7,16 +7,16 @@ function SearchForm({ handleChange, handleSearchSubmit }) {
   };
 
   return (
-    <div className="search__form-container">
+    <div className="search">
       <form action="" onSubmit={handleSubmit} className="search__form">
         <div className="search__input-container">
           <input
             onChange={handleChange}
             type="text"
             className="search__input"
-            placeholder="Nature"
+            placeholder="Enter topic"
           />
-          <button className="search__submit-button">Submit</button>
+          <button className="search__submit-button">Search</button>
         </div>
       </form>
     </div>
