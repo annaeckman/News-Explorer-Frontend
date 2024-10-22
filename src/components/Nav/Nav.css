@@ -108,7 +108,7 @@
 
 .nav__signout-btn {
   border: none;
-  background-image: url("../../assets/logout-black.png");
+  background-image: url("../../assets/logout-black.svg");
   height: 24px;
   width: 24px;
   background-size: cover;
@@ -120,7 +120,7 @@
 }
 
 .nav__signout-btn--white {
-  background-image: url("../../assets/logout-white.png");
+  background-image: url("../../assets/logout-white.svg");
 }
 
 @media screen and (max-width: 768px) {
@@ -148,11 +148,11 @@
     width: 24px;
     border: none;
     background: transparent;
-    background-image: url("../../assets/menu-white.png");
+    background-image: url("../../assets/menu-white.svg");
   }
 
   .nav__menu-btn--black {
-    background-image: url("../../assets/menu-black.png");
+    background-image: url("../../assets/menu-black.svg");
   }
 
   .nav__menu-btn--black:hover {
