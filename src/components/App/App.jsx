@@ -64,6 +64,7 @@ function App() {
 
     getNews(currentKeyword, APIkey, from, to)
       .then((data) => {
+        console.log(data);
         setIsLoading(false);
         setIsSuccess(true);
         setNewsData(data.articles);
