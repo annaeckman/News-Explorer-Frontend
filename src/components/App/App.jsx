@@ -16,14 +16,7 @@ import { getToken, setToken, removeToken } from "../../utils/token";
 import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
-import {
-  currentYear,
-  currentMonth,
-  currentDay,
-  lastWeekYear,
-  lastWeekMonth,
-  lastWeekDay,
-} from "../../utils/Dates";
+import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -49,9 +42,6 @@ function App() {
   };
 
   const handleSearchSubmit = () => {
-    const to = `${currentYear}-${currentMonth}-${currentDay}`;
-    const from = `${lastWeekYear}-${lastWeekMonth}-${lastWeekDay}`;
-
     if (currentKeyword === "") {
       setIsSuccess(true);
       return;
@@ -62,7 +52,7 @@ function App() {
     setIsSuccess(false);
     setIsError(false);
 
-    getNews(currentKeyword, APIkey, from, to)
+    getNews(currentKeyword, APIkey, getLastWeeksDate(), getTodaysDate())
       .then((data) => {
         console.log(data);
         setIsLoading(false);

@@ -1,11 +1,20 @@
-export const todaysDate = new Date();
-export const currentYear = todaysDate.getFullYear();
-export const currentMonth = todaysDate.getMonth() + 1;
-export const currentDay = todaysDate.getDate();
+export function getTodaysDate() {
+  let todaysDate = new Date();
+  const currentYear = todaysDate.getFullYear();
+  const currentMonth = todaysDate.getMonth() + 1;
+  const currentDay = todaysDate.getDate();
+  todaysDate = `${currentYear}-${currentMonth}-${currentDay}`;
 
-export const lastWeeksDate = new Date(
-  todaysDate.getTime() - 7 * 24 * 60 * 60 * 1000
-);
-export const lastWeekYear = lastWeeksDate.getFullYear();
-export const lastWeekMonth = lastWeeksDate.getMonth() + 1;
-export const lastWeekDay = lastWeeksDate.getDate();
+  return todaysDate;
+}
+
+export function getLastWeeksDate() {
+  const todaysDate = new Date();
+  let lastWeeksDate = new Date(todaysDate.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const lastWeekYear = lastWeeksDate.getFullYear();
+  const lastWeekMonth = lastWeeksDate.getMonth() + 1;
+  const lastWeekDay = lastWeeksDate.getDate();
+  lastWeeksDate = `${lastWeekYear}-${lastWeekMonth}-${lastWeekDay}`;
+
+  return lastWeeksDate;
+}
