@@ -10,13 +10,13 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-
 import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
 import { getToken, setToken, removeToken } from "../../utils/token";
 import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
+import { getArticles, getArticlesByToken } from "../../utils/api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -24,7 +24,7 @@ function App() {
     email: "",
     password: "",
     username: "",
-    savedNews: stubbedSavedNewsList,
+    savedNews: [],
   });
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -76,7 +76,7 @@ function App() {
   const handleRegistration = (values, resetRegistrationForm) => {
     if (!values) return;
 
-    authorize(values)
+    registerUser(values)
       .then((res) => {
         setIsLoggedIn(true);
         setCurrentUser(res.data);
@@ -118,6 +118,15 @@ function App() {
     navigate("/");
   };
 
+  const getUserArticles = () => {
+    const jwt = getToken();
+    if (!jwt) return;
+
+    return getArticlesByToken(jwt).then(({ data }) => {
+      return data;
+    });
+  };
+
   useEffect(() => {
     if (!activeModal) return;
 
@@ -133,6 +142,29 @@ function App() {
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]);
+
+  useEffect(() => {
+    const jwt = getToken();
+    if (!jwt) {
+      setCurrentUser((prevState) => ({
+        ...prevState,
+      }));
+      return;
+    }
+    getUserArticles().then((articles) => {
+      getUserByToken(jwt)
+        .then((userData) => {
+          setCurrentUser((prevState) => ({
+            ...prevState,
+            loggedIn: true,
+            username: userData.username,
+            email: userData.email,
+            savedNews: articles,
+          }));
+        })
+        .catch((err) => console.error(err));
+    });
+  }, []);
 
   useEffect(() => {
     const token = getToken();

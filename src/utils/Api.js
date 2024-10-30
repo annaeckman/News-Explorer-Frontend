@@ -15,6 +15,15 @@ function getArticles() {
   }).then(processServerResponse);
 }
 
+function getArticlesByToken(token) {
+  return fetch(`${baseUrl}/articles`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 function deleteArticle(id, token) {
   return fetch(`${baseUrl}/articles/${id}`, {
     method: "DELETE",
@@ -50,4 +59,4 @@ function getUser(token) {
   }).then(processServerResponse);
 }
 
-export { getArticles, deleteArticle, saveArticle };
+export { getArticles, deleteArticle, saveArticle, getArticlesByToken };
