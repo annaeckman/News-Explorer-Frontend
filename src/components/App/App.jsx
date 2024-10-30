@@ -11,7 +11,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-import { authorize, checkToken } from "../../utils/auth";
+import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
 import { getToken, setToken, removeToken } from "../../utils/token";
 import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 import { getNews } from "../../utils/newsapi";
@@ -94,13 +94,13 @@ function App() {
       return;
     }
 
-    authorize(values)
+    signinUser(values)
       .then((res) => {
         setToken(res.token);
-        return checkToken(res.token);
+        return getUserByToken(res.token);
       })
       .then((user) => {
-        // setCurrentUser(user);
+        setCurrentUser(user);
         setIsLoggedIn(true);
         closeActiveModal();
         resetLoginForm();
@@ -116,10 +116,6 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser(null);
     navigate("/");
-  };
-
-  const handleHamburgerClick = () => {
-    console.log("this is the nav menu for mobile screen size");
   };
 
   useEffect(() => {
@@ -138,6 +134,20 @@ function App() {
     };
   }, [activeModal]);
 
+  useEffect(() => {
+    const token = getToken();
+    if (!token || token === "undefined") {
+      return;
+    }
+
+    getUserByToken(token)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsLoggedIn(true);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="app">
       <CurrentUserContext.Provider value={userContext}>
@@ -147,7 +157,6 @@ function App() {
               path="/"
               element={
                 <Main
-                  handleHamburgerClick={handleHamburgerClick}
                   handleLoginClick={handleLoginClick}
                   isLoggedIn={isLoggedIn}
                   handleLogout={handleLogout}
@@ -164,7 +173,6 @@ function App() {
               path="/saved-news"
               element={
                 <SavedNews
-                  handleHamburgerClick={handleHamburgerClick}
                   isLoggedIn={isLoggedIn}
                   currentUser={currentUser}
                   handleLogout={handleLogout}

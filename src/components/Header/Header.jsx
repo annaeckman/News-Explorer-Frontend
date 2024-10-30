@@ -6,7 +6,6 @@ function Header({
   handleSearchSubmit,
   handleChange,
   handleLoginClick,
-  handleHamburgerClick,
   isLoggedIn,
   handleLogout,
 }) {
@@ -18,7 +17,6 @@ function Header({
         <Nav
           handleLoginClick={handleLoginClick}
           isInverse={false}
-          handleHamburgerClick={handleHamburgerClick}
           isLoggedIn={isLoggedIn}
           handleLogout={handleLogout}
         />

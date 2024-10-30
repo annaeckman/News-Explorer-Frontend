@@ -3,7 +3,7 @@ import { getToken } from "../utils/token";
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://api.mynewsexplorer.jumpingcrab.com"
-    : "http://localhost:3001";
+    : "http://localhost:3002";
 
 function getArticles() {
   return fetch(`${baseUrl}/articles`, {

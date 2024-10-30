@@ -5,7 +5,6 @@ import NewsCardsList from "../NewsCardList/NewsCardList";
 
 function Main({
   handleLoginClick,
-  handleHamburgerClick,
   isLoggedIn,
   handleLogout,
   handleSearchSubmit,
@@ -26,7 +25,6 @@ function Main({
         handleSearchSubmit={handleSearchSubmit}
         handleChange={handleChange}
         handleLoginClick={handleLoginClick}
-        handleHamburgerClick={handleHamburgerClick}
         isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
       />
