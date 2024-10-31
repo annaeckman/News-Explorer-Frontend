@@ -13,6 +13,7 @@ function Main({
   isLoading,
   isError,
   setCurrentKeyword,
+  handleSaveArticle,
 }) {
   const handleChange = (e) => {
     const value = e.target.value;
@@ -35,6 +36,7 @@ function Main({
           isLoading={isLoading}
           isError={isError}
           isLoggedIn={isLoggedIn}
+          handleSaveArticle={handleSaveArticle}
         />
         <AboutMe />
       </main>

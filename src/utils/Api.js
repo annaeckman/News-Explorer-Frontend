@@ -22,7 +22,7 @@ function deleteArticle(id, token) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   }).then(processServerResponse);
 }
@@ -31,11 +31,11 @@ function saveArticle(
   { keyword, title, text, date, source, link, image },
   token
 ) {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${baseUrl}/articles`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ keyword, title, text, date, source, link, image }),
   }).then(processServerResponse);

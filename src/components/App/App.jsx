@@ -17,7 +17,7 @@ import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
-import { getUserArticles, getUser } from "../../utils/api";
+import { getUserArticles, saveArticle, getUser } from "../../utils/api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -93,7 +93,23 @@ function App() {
       });
   };
 
-  const handleSaveArticle = () => {};
+  const handleSaveArticle = (article) => {
+    console.log(article);
+    const token = getToken();
+    const keyword = currentKeyword;
+    saveArticle(
+      {
+        keyword: keyword,
+        title: article.title,
+        text: article.description,
+        date: article.publishedAt,
+        source: article.source.name,
+        link: article.url,
+        image: article.urlToImage,
+      },
+      token
+    ).then((article) => setUserArticles(...userArticles, article));
+  };
 
   const handleLogin = (values, resetLoginForm) => {
     if (!values) {
@@ -130,9 +146,10 @@ function App() {
     const token = getToken();
     getUserArticles(token).then((articles) => {
       setUserArticles(articles);
-      console.log(articles);
     });
   }, [currentUser, isLoggedIn]);
+
+  // userArticles, only updates after refresh...????
 
   useEffect(() => {
     if (!activeModal) return;
@@ -183,6 +200,7 @@ function App() {
                     isLoading={isLoading}
                     isError={isError}
                     setCurrentKeyword={setCurrentKeyword}
+                    handleSaveArticle={handleSaveArticle}
                   />
                 }
               ></Route>

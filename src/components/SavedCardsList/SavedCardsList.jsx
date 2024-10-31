@@ -5,7 +5,7 @@ import NewsCard from "../NewsCard/NewsCard";
 
 function SavedCardsList() {
   const { userArticles } = useContext(UserArticleContext);
-
+  console.log(userArticles);
   return (
     <>
       <ul className="saved-cards">

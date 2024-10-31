@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../NewsCard/NewsCard.css";
 import { useLocation } from "react-router-dom";
 
-function NewsCard({ article, isLoggedIn }) {
+function NewsCard({ article, isLoggedIn, handleSaveArticle }) {
   const location = useLocation();
   const source =
     location.pathname === "/"
@@ -20,7 +20,7 @@ function NewsCard({ article, isLoggedIn }) {
 
   const handleSaveClick = () => {
     isClicked === true ? setIsClicked(false) : setIsClicked(true);
-    // add logic to add saved article to currentUser state...?
+    handleSaveArticle(article);
   };
 
   return (
