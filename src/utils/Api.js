@@ -1,27 +1,20 @@
 import { processServerResponse } from "../utils/utils";
 import { getToken } from "../utils/token";
+// const baseUrl = "https://api.mynewsexplorer.jumpingcrab.com";
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://api.mynewsexplorer.jumpingcrab.com"
     : "http://localhost:3002";
 
-function getArticles() {
+function getUserArticles(token) {
   return fetch(`${baseUrl}/articles`, {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-    },
-  }).then(processServerResponse);
-}
-
-function getArticlesByToken(token) {
-  return fetch(`${baseUrl}/articles`, {
-    method: "GET",
-    headers: {
       Authorization: `Bearer ${token}`,
     },
-  });
+  }).then(processServerResponse);
 }
 
 function deleteArticle(id, token) {
@@ -59,4 +52,4 @@ function getUser(token) {
   }).then(processServerResponse);
 }
 
-export { getArticles, deleteArticle, saveArticle, getArticlesByToken };
+export { getUserArticles, deleteArticle, saveArticle, getUser };

@@ -10,22 +10,22 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import SuccessModal from "../SuccessModal/SuccessModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { UserArticleContext } from "../../contexts/UserArticleContext";
 import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
 import { getToken, setToken, removeToken } from "../../utils/token";
 import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
-import { getArticles, getArticlesByToken } from "../../utils/api";
+import { getUserArticles, getUser } from "../../utils/api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
-    loggedIn: false,
     email: "",
     password: "",
     username: "",
-    savedNews: [],
   });
+  const [userArticles, setUserArticles] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [newsData, setNewsData] = useState([]);
@@ -41,6 +41,11 @@ function App() {
     setCurrentUser,
   };
 
+  const userArticleContext = {
+    userArticles,
+    setUserArticles,
+  };
+
   const handleSearchSubmit = () => {
     if (currentKeyword === "") {
       setIsSuccess(true);
@@ -54,7 +59,6 @@ function App() {
 
     getNews(currentKeyword, APIkey, getLastWeeksDate(), getTodaysDate())
       .then((data) => {
-        console.log(data);
         setIsLoading(false);
         setIsSuccess(true);
         setNewsData(data.articles);
@@ -89,6 +93,8 @@ function App() {
       });
   };
 
+  const handleSaveArticle = () => {};
+
   const handleLogin = (values, resetLoginForm) => {
     if (!values) {
       return;
@@ -118,14 +124,15 @@ function App() {
     navigate("/");
   };
 
-  const getUserArticles = () => {
-    const jwt = getToken();
-    if (!jwt) return;
+  useEffect(() => {
+    if (!isLoggedIn) return;
 
-    return getArticlesByToken(jwt).then(({ data }) => {
-      return data;
+    const token = getToken();
+    getUserArticles(token).then((articles) => {
+      setUserArticles(articles);
+      console.log(articles);
     });
-  };
+  }, [currentUser, isLoggedIn]);
 
   useEffect(() => {
     if (!activeModal) return;
@@ -144,29 +151,6 @@ function App() {
   }, [activeModal]);
 
   useEffect(() => {
-    const jwt = getToken();
-    if (!jwt) {
-      setCurrentUser((prevState) => ({
-        ...prevState,
-      }));
-      return;
-    }
-    getUserArticles().then((articles) => {
-      getUserByToken(jwt)
-        .then((userData) => {
-          setCurrentUser((prevState) => ({
-            ...prevState,
-            loggedIn: true,
-            username: userData.username,
-            email: userData.email,
-            savedNews: articles,
-          }));
-        })
-        .catch((err) => console.error(err));
-    });
-  }, []);
-
-  useEffect(() => {
     const token = getToken();
     if (!token || token === "undefined") {
       return;
@@ -183,54 +167,56 @@ function App() {
   return (
     <div className="app">
       <CurrentUserContext.Provider value={userContext}>
-        <div className="app__content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  handleLoginClick={handleLoginClick}
-                  isLoggedIn={isLoggedIn}
-                  handleLogout={handleLogout}
-                  handleSearchSubmit={handleSearchSubmit}
-                  newsData={newsData}
-                  isSuccess={isSuccess}
-                  isLoading={isLoading}
-                  isError={isError}
-                  setCurrentKeyword={setCurrentKeyword}
-                />
-              }
-            ></Route>
-            <Route
-              path="/saved-news"
-              element={
-                <SavedNews
-                  isLoggedIn={isLoggedIn}
-                  currentUser={currentUser}
-                  handleLogout={handleLogout}
-                />
-              }
-            ></Route>
-          </Routes>
-          <Footer />
-          <LoginModal
-            isOpen={activeModal === "login"}
-            onClose={closeActiveModal}
-            setActiveModal={setActiveModal}
-            handleLogin={handleLogin}
-          />
-          <RegisterModal
-            isOpen={activeModal === "register"}
-            onClose={closeActiveModal}
-            setActiveModal={setActiveModal}
-            handleRegistration={handleRegistration}
-          />
-          <SuccessModal
-            isOpen={activeModal === "success"}
-            onClose={closeActiveModal}
-            setActiveModal={setActiveModal}
-          />
-        </div>
+        <UserArticleContext.Provider value={userArticleContext}>
+          <div className="app__content">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    handleLoginClick={handleLoginClick}
+                    isLoggedIn={isLoggedIn}
+                    handleLogout={handleLogout}
+                    handleSearchSubmit={handleSearchSubmit}
+                    newsData={newsData}
+                    isSuccess={isSuccess}
+                    isLoading={isLoading}
+                    isError={isError}
+                    setCurrentKeyword={setCurrentKeyword}
+                  />
+                }
+              ></Route>
+              <Route
+                path="/saved-news"
+                element={
+                  <SavedNews
+                    isLoggedIn={isLoggedIn}
+                    currentUser={currentUser}
+                    handleLogout={handleLogout}
+                  />
+                }
+              ></Route>
+            </Routes>
+            <Footer />
+            <LoginModal
+              isOpen={activeModal === "login"}
+              onClose={closeActiveModal}
+              setActiveModal={setActiveModal}
+              handleLogin={handleLogin}
+            />
+            <RegisterModal
+              isOpen={activeModal === "register"}
+              onClose={closeActiveModal}
+              setActiveModal={setActiveModal}
+              handleRegistration={handleRegistration}
+            />
+            <SuccessModal
+              isOpen={activeModal === "success"}
+              onClose={closeActiveModal}
+              setActiveModal={setActiveModal}
+            />
+          </div>
+        </UserArticleContext.Provider>
       </CurrentUserContext.Provider>
     </div>
   );

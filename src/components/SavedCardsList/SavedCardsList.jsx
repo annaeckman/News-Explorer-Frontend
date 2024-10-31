@@ -1,16 +1,16 @@
 import "./SavedCardsList.css";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { UserArticleContext } from "../../contexts/UserArticleContext";
 import NewsCard from "../NewsCard/NewsCard";
 
 function SavedCardsList() {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { userArticles } = useContext(UserArticleContext);
 
   return (
     <>
       <ul className="saved-cards">
-        {currentUser.savedNews.map((article) => {
-          return <NewsCard article={article} key={article.url} />;
+        {userArticles?.map((article) => {
+          return <NewsCard article={article} key={article.image} />;
         })}
       </ul>
     </>
