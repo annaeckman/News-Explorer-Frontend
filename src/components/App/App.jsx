@@ -135,7 +135,7 @@ function App() {
       .then((data) => {
         console.log(data);
         setUserArticles((prevArticles) =>
-          prevArticles.filter((article) => article._id !== data.data.id)
+          prevArticles.filter((article) => article._id !== data.data._id)
         );
       })
       .catch((err) => console.error(err));

@@ -200,6 +200,12 @@
     top: 8px;
     left: 8px;
   }
+
+  .news-card__sign-in-icon {
+    top: 8px;
+    left: 8px;
+    width: 160px;
+  }
 }
 
 @media screen and (max-width: 450px) {

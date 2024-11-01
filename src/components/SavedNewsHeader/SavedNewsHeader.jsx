@@ -19,7 +19,7 @@ function SavedNewsHeader() {
     );
   };
 
-  // const currentKeywords = getKeywords();
+  const currentKeywords = getKeywords();
 
   return (
     <section className="saved-news-header">
@@ -27,16 +27,18 @@ function SavedNewsHeader() {
       <p className="saved-news-header__subtitle">
         {currentUser?.name}, you have {userArticles?.length} saved articles
       </p>
-      <p className="saved-news-header__keywords">
-        By keywords:{" "}
-        {/* <span className="saved-news-header__keywords_bold">
-          {currentKeywords[0]}, {currentKeywords[1]}, and{" "}
-          {currentKeywords.length === 3
-            ? currentKeywords[2]
-            : currentKeywords.length - 2}{" "}
-          {currentKeywords.length > 3 && "others"}
-        </span> */}
-      </p>
+      {!userArticles.length === 0 && (
+        <p className="saved-news-header__keywords">
+          By keywords:{" "}
+          <span className="saved-news-header__keywords_bold">
+            {currentKeywords[0]}, {currentKeywords[1]}, and{" "}
+            {currentKeywords.length === 3
+              ? currentKeywords[2]
+              : currentKeywords.length - 2}{" "}
+            {currentKeywords.length > 3 && "others"}
+          </span>
+        </p>
+      )}
     </section>
   );
 }
