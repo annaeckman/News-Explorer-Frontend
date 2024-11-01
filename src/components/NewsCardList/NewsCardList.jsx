@@ -13,6 +13,7 @@ function NewsCardList({
   isError,
   isLoggedIn,
   handleSaveArticle,
+  handleDeleteArticle,
 }) {
   newsData = newsData.filter((article) => article.title !== "[Removed]");
   //filter out articles that say "removed"
@@ -77,6 +78,7 @@ function NewsCardList({
               key={article.url}
               article={article}
               handleSaveArticle={handleSaveArticle}
+              handleDeleteArticle={handleDeleteArticle}
             />
           ))}
         </ul>

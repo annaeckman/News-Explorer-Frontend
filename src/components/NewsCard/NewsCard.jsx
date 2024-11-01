@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "../NewsCard/NewsCard.css";
 import { useLocation } from "react-router-dom";
+import { UserArticleContext } from "../../contexts/UserArticleContext";
 
-function NewsCard({ article, isLoggedIn, handleSaveArticle }) {
+function NewsCard({
+  article,
+  isLoggedIn,
+  handleSaveArticle,
+  handleDeleteArticle,
+}) {
   const location = useLocation();
+  const { userArticles } = useContext(UserArticleContext);
+
   const source =
     location.pathname === "/"
       ? article.source.name.toUpperCase().split(".")[0]
@@ -23,6 +31,10 @@ function NewsCard({ article, isLoggedIn, handleSaveArticle }) {
     handleSaveArticle(article);
   };
 
+  const handleDeleteClick = () => {
+    handleDeleteArticle(article._id);
+  };
+
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
@@ -30,9 +42,11 @@ function NewsCard({ article, isLoggedIn, handleSaveArticle }) {
           <div className="news-card__keyword-icon">{article.keyword}</div>
         )}
         <div className="news-card__btns">
-          <div className="news-card__sign-in-icon">
-            Sign in to save articles
-          </div>
+          {!isLoggedIn && location.pathname === "/" && (
+            <div className="news-card__sign-in-icon">
+              Sign in to save articles
+            </div>
+          )}
 
           {location.pathname === "/" && (
             <button
@@ -46,7 +60,10 @@ function NewsCard({ article, isLoggedIn, handleSaveArticle }) {
             ></button>
           )}
           {location.pathname === "/saved-news" && (
-            <button className="news-card__delete"></button>
+            <button
+              className="news-card__delete"
+              onClick={handleDeleteClick}
+            ></button>
           )}
         </div>
         <img

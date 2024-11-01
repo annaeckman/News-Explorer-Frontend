@@ -17,7 +17,12 @@ import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
-import { getUserArticles, saveArticle, getUser } from "../../utils/api";
+import {
+  getUserArticles,
+  saveArticle,
+  deleteArticle,
+  getUser,
+} from "../../utils/api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -94,9 +99,11 @@ function App() {
   };
 
   const handleSaveArticle = (article) => {
-    console.log(article);
     const token = getToken();
-    const keyword = currentKeyword;
+    const keyword = currentKeyword[0].toUpperCase() + currentKeyword.slice(1);
+
+    if (!token) return;
+
     saveArticle(
       {
         keyword: keyword,
@@ -108,7 +115,26 @@ function App() {
         image: article.urlToImage,
       },
       token
-    ).then((article) => setUserArticles(...userArticles, article));
+    )
+      .then((newArticle) => {
+        setUserArticles((prevArticles) => [...prevArticles, newArticle]);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleDeleteArticle = (id) => {
+    console.log(id);
+    const token = getToken();
+
+    if (!token) return;
+
+    deleteArticle(id, token)
+      .then((data) => {
+        setUserArticles((prevArticles) =>
+          prevArticles.filter((article) => article._id !== data.id)
+        );
+      })
+      .catch((err) => console.error(err));
   };
 
   const handleLogin = (values, resetLoginForm) => {
@@ -201,6 +227,7 @@ function App() {
                     isError={isError}
                     setCurrentKeyword={setCurrentKeyword}
                     handleSaveArticle={handleSaveArticle}
+                    handleDeleteArticle={handleDeleteArticle}
                   />
                 }
               ></Route>
@@ -211,6 +238,7 @@ function App() {
                     isLoggedIn={isLoggedIn}
                     currentUser={currentUser}
                     handleLogout={handleLogout}
+                    handleDeleteArticle={handleDeleteArticle}
                   />
                 }
               ></Route>
