@@ -119,7 +119,7 @@ function App() {
     )
       .then((newArticle) => {
         console.log(newArticle);
-        setUserArticles((prevArticles) => [...prevArticles, newArticle]);
+        setUserArticles((prevArticles) => [...prevArticles, newArticle.data]);
         console.log(userArticles);
       })
       .catch((err) => console.error(err));
@@ -133,8 +133,9 @@ function App() {
 
     deleteArticle(id, token)
       .then((data) => {
+        console.log(data);
         setUserArticles((prevArticles) =>
-          prevArticles.filter((article) => article._id !== data.id)
+          prevArticles.filter((article) => article._id !== data.data.id)
         );
       })
       .catch((err) => console.error(err));
