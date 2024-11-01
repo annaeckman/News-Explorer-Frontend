@@ -1,4 +1,4 @@
-import "../Header/header.css";
+import "../Header/Header.css";
 import Nav from "../Nav/Nav";
 import SearchForm from "../SearchForm/SearchForm";
 

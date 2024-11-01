@@ -17,12 +17,7 @@ import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
-import {
-  getUserArticles,
-  saveArticle,
-  deleteArticle,
-  getUser,
-} from "../../utils/api";
+import { getUserArticles, saveArticle, deleteArticle } from "../../utils/api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
