@@ -117,7 +117,9 @@ function App() {
       token
     )
       .then((newArticle) => {
+        console.log(newArticle);
         setUserArticles((prevArticles) => [...prevArticles, newArticle]);
+        console.log(userArticles);
       })
       .catch((err) => console.error(err));
   };
