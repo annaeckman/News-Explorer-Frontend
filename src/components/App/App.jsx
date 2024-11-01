@@ -9,7 +9,7 @@ import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import SuccessModal from "../SuccessModal/SuccessModal";
-import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { UserArticleContext } from "../../contexts/UserArticleContext";
 import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
@@ -37,7 +37,7 @@ function App() {
   const [protectedDestination, setProtectedDestination] = useState("");
 
   useEffect(() => {
-    if (protectedDestination !== "") setActiveModal("signin");
+    if (protectedDestination !== "") setActiveModal("login");
   }, [protectedDestination]);
 
   const navigate = useNavigate();
@@ -156,6 +156,7 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
         resetLoginForm();
+        navigate(protectedDestination || "/");
       })
       .catch((err) => {
         console.error("Login failed", err);
@@ -238,7 +239,10 @@ function App() {
               <Route
                 path="/saved-news"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute
+                    setProtectedDestination={setProtectedDestination}
+                    isLoggedIn={isLoggedIn}
+                  >
                     <SavedNews
                       isLoggedIn={isLoggedIn}
                       currentUser={currentUser}
