@@ -6,10 +6,20 @@ import { UserArticleContext } from "../../contexts/UserArticleContext";
 function SavedNewsHeader() {
   const { currentUser } = useContext(CurrentUserContext);
   const { userArticles } = useContext(UserArticleContext);
-  const currentKeywordsWithDuplicates = userArticles.map(
-    (article) => article.keyword
-  );
-  const currentKeywords = [...new Set(currentKeywordsWithDuplicates)];
+
+  const getKeywords = () => {
+    const currentKeywordsWithDuplicates = userArticles.map(
+      (article) => article.keyword
+    );
+    const currentKeywordsLowercase = [
+      ...new Set(currentKeywordsWithDuplicates),
+    ];
+    return currentKeywordsLowercase.map(
+      (keyword) => keyword[0].toUpperCase() + keyword.slice(1)
+    );
+  };
+
+  const currentKeywords = getKeywords();
 
   return (
     <section className="saved-news-header">
@@ -21,7 +31,10 @@ function SavedNewsHeader() {
         By keywords:{" "}
         <span className="saved-news-header__keywords_bold">
           {currentKeywords[0]}, {currentKeywords[1]}, and{" "}
-          {currentKeywords.length - 2} others
+          {currentKeywords.length === 3
+            ? currentKeywords[2]
+            : currentKeywords.length - 2}{" "}
+          {currentKeywords.length > 3 && "others"}
         </span>
       </p>
     </section>
