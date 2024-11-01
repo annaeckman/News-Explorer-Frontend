@@ -9,6 +9,7 @@ import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import SuccessModal from "../SuccessModal/SuccessModal";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { UserArticleContext } from "../../contexts/UserArticleContext";
 import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
@@ -33,6 +34,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [protectedDestination, setProtectedDestination] = useState("");
+
+  useEffect(() => {
+    if (protectedDestination !== "") setActiveModal("signin");
+  }, [protectedDestination]);
 
   const navigate = useNavigate();
 
@@ -231,12 +237,14 @@ function App() {
               <Route
                 path="/saved-news"
                 element={
-                  <SavedNews
-                    isLoggedIn={isLoggedIn}
-                    currentUser={currentUser}
-                    handleLogout={handleLogout}
-                    handleDeleteArticle={handleDeleteArticle}
-                  />
+                  <ProtectedRoute>
+                    <SavedNews
+                      isLoggedIn={isLoggedIn}
+                      currentUser={currentUser}
+                      handleLogout={handleLogout}
+                      handleDeleteArticle={handleDeleteArticle}
+                    />
+                  </ProtectedRoute>
                 }
               ></Route>
             </Routes>
