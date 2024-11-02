@@ -9,30 +9,23 @@ import SavedNews from "../SavedNews/SavedNews";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import SuccessModal from "../SuccessModal/SuccessModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-
-import { authorize, checkToken } from "../../utils/auth";
-import { getToken, setToken, removeToken } from "../../utils/token";
-import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
+import { UserArticleContext } from "../../contexts/UserArticleContext";
+import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
+import { getToken, setToken } from "../../utils/token";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
-import {
-  currentYear,
-  currentMonth,
-  currentDay,
-  lastWeekYear,
-  lastWeekMonth,
-  lastWeekDay,
-} from "../../utils/Dates";
+import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
+import { getUserArticles, saveArticle, deleteArticle } from "../../utils/Api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
-    loggedIn: false,
     email: "",
     password: "",
     username: "",
-    savedNews: stubbedSavedNewsList,
   });
+  const [userArticles, setUserArticles] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [newsData, setNewsData] = useState([]);
@@ -40,6 +33,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [protectedDestination, setProtectedDestination] = useState("");
+
+  useEffect(() => {
+    if (protectedDestination !== "") setActiveModal("login");
+  }, [protectedDestination]);
 
   const navigate = useNavigate();
 
@@ -48,10 +46,12 @@ function App() {
     setCurrentUser,
   };
 
-  const handleSearchSubmit = () => {
-    const to = `${currentYear}-${currentMonth}-${currentDay}`;
-    const from = `${lastWeekYear}-${lastWeekMonth}-${lastWeekDay}`;
+  const userArticleContext = {
+    userArticles,
+    setUserArticles,
+  };
 
+  const handleSearchSubmit = () => {
     if (currentKeyword === "") {
       setIsSuccess(true);
       return;
@@ -62,7 +62,7 @@ function App() {
     setIsSuccess(false);
     setIsError(false);
 
-    getNews(currentKeyword, APIkey, from, to)
+    getNews(currentKeyword, APIkey, getLastWeeksDate(), getTodaysDate())
       .then((data) => {
         setIsLoading(false);
         setIsSuccess(true);
@@ -85,7 +85,7 @@ function App() {
   const handleRegistration = (values, resetRegistrationForm) => {
     if (!values) return;
 
-    authorize(values)
+    registerUser(values)
       .then((res) => {
         setIsLoggedIn(true);
         setCurrentUser(res.data);
@@ -98,21 +98,64 @@ function App() {
       });
   };
 
+  const handleSaveArticle = (article) => {
+    const token = getToken();
+    const keyword = currentKeyword[0].toUpperCase() + currentKeyword.slice(1);
+
+    if (!token) return;
+
+    saveArticle(
+      {
+        keyword: keyword,
+        title: article.title,
+        text: article.description,
+        date: article.publishedAt,
+        source: article.source.name,
+        link: article.url,
+        image: article.urlToImage,
+      },
+      token
+    )
+      .then((newArticle) => {
+        console.log(newArticle);
+        setUserArticles((prevArticles) => [...prevArticles, newArticle.data]);
+        console.log(userArticles);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleDeleteArticle = (id) => {
+    console.log(id);
+    const token = getToken();
+
+    if (!token) return;
+
+    deleteArticle(id, token)
+      .then((data) => {
+        console.log(data);
+        setUserArticles((prevArticles) =>
+          prevArticles.filter((article) => article._id !== data.data._id)
+        );
+      })
+      .catch((err) => console.error(err));
+  };
+
   const handleLogin = (values, resetLoginForm) => {
     if (!values) {
       return;
     }
 
-    authorize(values)
+    signinUser(values)
       .then((res) => {
         setToken(res.token);
-        return checkToken(res.token);
+        return getUserByToken(res.token);
       })
       .then((user) => {
-        // setCurrentUser(user);
+        setCurrentUser(user);
         setIsLoggedIn(true);
         closeActiveModal();
         resetLoginForm();
+        navigate(protectedDestination || "/");
       })
       .catch((err) => {
         console.error("Login failed", err);
@@ -127,9 +170,16 @@ function App() {
     navigate("/");
   };
 
-  const handleHamburgerClick = () => {
-    console.log("this is the nav menu for mobile screen size");
-  };
+  useEffect(() => {
+    if (!isLoggedIn) return;
+
+    const token = getToken();
+    getUserArticles(token).then((articles) => {
+      setUserArticles(articles);
+    });
+  }, [currentUser, isLoggedIn]);
+
+  // userArticles, only updates after refresh...????
 
   useEffect(() => {
     if (!activeModal) return;
@@ -147,59 +197,81 @@ function App() {
     };
   }, [activeModal]);
 
+  useEffect(() => {
+    const token = getToken();
+    if (!token || token === "undefined") {
+      return;
+    }
+
+    getUserByToken(token)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsLoggedIn(true);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="app">
       <CurrentUserContext.Provider value={userContext}>
-        <div className="app__content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  handleHamburgerClick={handleHamburgerClick}
-                  handleLoginClick={handleLoginClick}
-                  isLoggedIn={isLoggedIn}
-                  handleLogout={handleLogout}
-                  handleSearchSubmit={handleSearchSubmit}
-                  newsData={newsData}
-                  isSuccess={isSuccess}
-                  isLoading={isLoading}
-                  isError={isError}
-                  setCurrentKeyword={setCurrentKeyword}
-                />
-              }
-            ></Route>
-            <Route
-              path="/saved-news"
-              element={
-                <SavedNews
-                  handleHamburgerClick={handleHamburgerClick}
-                  isLoggedIn={isLoggedIn}
-                  currentUser={currentUser}
-                  handleLogout={handleLogout}
-                />
-              }
-            ></Route>
-          </Routes>
-          <Footer />
-          <LoginModal
-            isOpen={activeModal === "login"}
-            onClose={closeActiveModal}
-            setActiveModal={setActiveModal}
-            handleLogin={handleLogin}
-          />
-          <RegisterModal
-            isOpen={activeModal === "register"}
-            onClose={closeActiveModal}
-            setActiveModal={setActiveModal}
-            handleRegistration={handleRegistration}
-          />
-          <SuccessModal
-            isOpen={activeModal === "success"}
-            onClose={closeActiveModal}
-            setActiveModal={setActiveModal}
-          />
-        </div>
+        <UserArticleContext.Provider value={userArticleContext}>
+          <div className="app__content">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    handleLoginClick={handleLoginClick}
+                    isLoggedIn={isLoggedIn}
+                    handleLogout={handleLogout}
+                    handleSearchSubmit={handleSearchSubmit}
+                    newsData={newsData}
+                    isSuccess={isSuccess}
+                    isLoading={isLoading}
+                    isError={isError}
+                    setCurrentKeyword={setCurrentKeyword}
+                    handleSaveArticle={handleSaveArticle}
+                    handleDeleteArticle={handleDeleteArticle}
+                  />
+                }
+              ></Route>
+              <Route
+                path="/saved-news"
+                element={
+                  <ProtectedRoute
+                    setProtectedDestination={setProtectedDestination}
+                    isLoggedIn={isLoggedIn}
+                  >
+                    <SavedNews
+                      isLoggedIn={isLoggedIn}
+                      currentUser={currentUser}
+                      handleLogout={handleLogout}
+                      handleDeleteArticle={handleDeleteArticle}
+                    />
+                  </ProtectedRoute>
+                }
+              ></Route>
+            </Routes>
+            <Footer />
+            <LoginModal
+              isOpen={activeModal === "login"}
+              onClose={closeActiveModal}
+              setActiveModal={setActiveModal}
+              handleLogin={handleLogin}
+            />
+            <RegisterModal
+              isOpen={activeModal === "register"}
+              onClose={closeActiveModal}
+              setActiveModal={setActiveModal}
+              handleRegistration={handleRegistration}
+            />
+            <SuccessModal
+              isOpen={activeModal === "success"}
+              onClose={closeActiveModal}
+              setActiveModal={setActiveModal}
+            />
+          </div>
+        </UserArticleContext.Provider>
       </CurrentUserContext.Provider>
     </div>
   );

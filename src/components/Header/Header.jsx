@@ -1,4 +1,4 @@
-import "../Header/header.css";
+import "../Header/Header.css";
 import Nav from "../Nav/Nav";
 import SearchForm from "../SearchForm/SearchForm";
 
@@ -6,7 +6,6 @@ function Header({
   handleSearchSubmit,
   handleChange,
   handleLoginClick,
-  handleHamburgerClick,
   isLoggedIn,
   handleLogout,
 }) {
@@ -18,7 +17,6 @@ function Header({
         <Nav
           handleLoginClick={handleLoginClick}
           isInverse={false}
-          handleHamburgerClick={handleHamburgerClick}
           isLoggedIn={isLoggedIn}
           handleLogout={handleLogout}
         />

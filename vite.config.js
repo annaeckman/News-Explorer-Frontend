@@ -7,5 +7,5 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  base: "/News-Explorer-Frontend/",
+  base: "https://stage-3-frontend-auth--gilded-donut-46b63f.netlify.app/",
 });
