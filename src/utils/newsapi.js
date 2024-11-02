@@ -1,9 +1,7 @@
 import { processServerResponse } from "../utils/utils";
-import stubData from "./stubResponse.json";
-const baseUrl = "https://newsapi.org/v2/everything";
+const baseUrl = "/api/everything";
 
 export const getNews = (q, apiKey, from, to) => {
-  // return new Promise((r) => r(stubData));
   return fetch(
     `${baseUrl}?q=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${apiKey}`,
     {
