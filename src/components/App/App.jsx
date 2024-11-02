@@ -13,12 +13,11 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { UserArticleContext } from "../../contexts/UserArticleContext";
 import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
-import { getToken, setToken, removeToken } from "../../utils/token";
-import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
+import { getToken, setToken } from "../../utils/token";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
-import { getUserArticles, saveArticle, deleteArticle } from "../../utils/api";
+import { getUserArticles, saveArticle, deleteArticle } from "../../utils/Api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
