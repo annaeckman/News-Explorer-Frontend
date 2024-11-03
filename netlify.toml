@@ -1,0 +1,15 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://newsapi.org/v2/:splat"
+  status = 200
+  force = true
+  headers = { Authorization = "NEWS_API_KEY" }
+  [build]
+    command = "sed -i \"s|NEWS_API_KEY|${VITE_NEWS_API_KEY}|g\" netlify.toml && yarn build"
+
+
+[[headers]]
+  for = "/*" # you can configure the correct paths here
+  [headers.values]
+    access-control-allow-origin = "*"
+

@@ -1,5 +1,6 @@
 {
   "name": "news-explorer-frontend",
+  "homepage": "http://mynewsexplorer.jumpingcrab.com",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && scp -r ./dist/* annaeckman@wtwrwtwr.jumpingcrab.com:/home/annaeckman/final-project-frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
