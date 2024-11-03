@@ -13,7 +13,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { UserArticleContext } from "../../contexts/UserArticleContext";
 import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
-import { getToken, setToken } from "../../utils/token";
+import { getToken, setToken, removeToken } from "../../utils/token";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
@@ -88,6 +88,7 @@ function App() {
 
     registerUser(values)
       .then((res) => {
+        console.log(res);
         setIsLoggedIn(true);
         setCurrentUser(res.data);
         resetRegistrationForm();
@@ -168,6 +169,7 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser(null);
     navigate("/");
+    removeToken();
   };
 
   useEffect(() => {

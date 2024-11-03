@@ -19,3 +19,7 @@ export default function ProtectedRoute({
   if (!isLoggedIn) return;
   if (isLoggedIn) return children;
 }
+
+// this protected route is firing after refresh on saved-news page.
+// so using isLoggedIn, isn't working, i have to figure out a way
+// to tell if the jwt check has happened or not??
