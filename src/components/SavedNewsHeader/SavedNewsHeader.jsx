@@ -7,20 +7,26 @@ function SavedNewsHeader() {
   const { currentUser } = useContext(CurrentUserContext);
   const { userArticles } = useContext(UserArticleContext);
 
-  const getKeywords = () => {
-    const currentKeywordsWithDuplicates = userArticles.map(
-      (article) => article.keyword
-    );
-    const currentKeywordsLowercase = [
-      ...new Set(currentKeywordsWithDuplicates),
-    ];
-    return currentKeywordsLowercase.map(
-      (keyword) => keyword[0].toUpperCase() + keyword.slice(1)
-    );
-  };
+  const keywords = userArticles.map((article) => article.keyword);
+
+  const keywordsWithoutDuplicates = keywords.reduce((uniques, current) => {
+    return { ...uniques, [current]: true };
+  }, {});
+
+  // const getKeywords = () => {
+  //   const currentKeywordsWithDuplicates = userArticles.map(
+  //     (article) => article.keyword
+  //   );
+  //   const currentKeywordsLowercase = [
+  //     ...new Set(currentKeywordsWithDuplicates),
+  //   ];
+  //   return currentKeywordsLowercase.map(
+  //     (keyword) => keyword[0].toUpperCase() + keyword.slice(1)
+  //   );
+  // };
 
   const currentKeywords = getKeywords();
-
+  console.log(userArticles.length);
   return (
     <section className="saved-news-header">
       <h3 className="saved-news-header__title">Saved articles</h3>

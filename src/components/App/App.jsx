@@ -157,7 +157,7 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
         resetLoginForm();
-        navigate(protectedDestination || "/");
+        navigate("/");
       })
       .catch((err) => {
         console.error("Login failed", err);
