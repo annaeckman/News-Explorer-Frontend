@@ -13,8 +13,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { UserArticleContext } from "../../contexts/UserArticleContext";
 import { getUserByToken, signinUser, registerUser } from "../../utils/auth";
-import { getToken, setToken, removeToken } from "../../utils/token";
-import { stubbedSavedNewsList } from "../../utils/stubSavedNewsList";
+import { getToken, setToken } from "../../utils/token";
 import { getNews } from "../../utils/newsapi";
 import { APIkey } from "../../utils/constants";
 import { getTodaysDate, getLastWeeksDate } from "../../utils/Dates";
@@ -32,9 +31,10 @@ function App() {
   const [newsData, setNewsData] = useState([]);
   const [currentKeyword, setCurrentKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccessNewsData, setIsSuccessNewsData] = useState(false);
   const [isError, setIsError] = useState(false);
   const [protectedDestination, setProtectedDestination] = useState("");
+  const [authLoaded, setIsAuthLoaded] = useState(false);
 
   useEffect(() => {
     if (protectedDestination !== "") setActiveModal("login");
@@ -54,19 +54,19 @@ function App() {
 
   const handleSearchSubmit = () => {
     if (currentKeyword === "") {
-      setIsSuccess(true);
+      setIsSuccessNewsData(true);
       return;
     }
 
     setIsLoading(true);
     setNewsData([]);
-    setIsSuccess(false);
+    setIsSuccessNewsData(false);
     setIsError(false);
 
     getNews(currentKeyword, APIkey, getLastWeeksDate(), getTodaysDate())
       .then((data) => {
         setIsLoading(false);
-        setIsSuccess(true);
+        setIsSuccessNewsData(true);
         setNewsData(data.articles);
       })
       .catch((err) => {
@@ -226,7 +226,7 @@ function App() {
                     handleLogout={handleLogout}
                     handleSearchSubmit={handleSearchSubmit}
                     newsData={newsData}
-                    isSuccess={isSuccess}
+                    isSuccess={isSuccessNewsData}
                     isLoading={isLoading}
                     isError={isError}
                     setCurrentKeyword={setCurrentKeyword}
