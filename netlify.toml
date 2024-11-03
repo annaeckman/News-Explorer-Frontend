@@ -3,7 +3,6 @@
   to = "https://newsapi.org/v2/:splat"
   status = 200
   force = true
-  headers = { Authorization = "NEWS_API_KEY" }
  
 
 [[headers]]
@@ -11,6 +10,4 @@
   [headers.values]
     access-control-allow-origin = "*"
 
-[build]
-  command = "sed -i \"s|NEWS_API_KEY|${VITE_NEWS_API_KEY}|g\" netlify.toml && npm run build"
 
