@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import "../NewsCard/NewsCard.css";
 import { useLocation } from "react-router-dom";
-import { UserArticleContext } from "../../contexts/UserArticleContext";
+import { Link } from "react-router-dom";
 
 function NewsCard({
   article,
@@ -10,7 +10,6 @@ function NewsCard({
   handleDeleteArticle,
 }) {
   const location = useLocation();
-  const { userArticles } = useContext(UserArticleContext);
 
   const source =
     location.pathname === "/"
@@ -77,7 +76,13 @@ function NewsCard({
       make save button & icon it's own component */}
       <div className="news-card__text">
         <span className="news-card__date">{dateInWords}</span>
-        <h2 className="news-card__title">{article.title}</h2>
+        <Link
+          to={article.link}
+          target="_blank"
+          className="news-card__title-link"
+        >
+          <h2 className="news-card__title">{article.title}</h2>
+        </Link>
         <p className="news-card__description">
           {location.pathname === "/" ? article.description : article.text}
         </p>
