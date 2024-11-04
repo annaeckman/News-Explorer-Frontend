@@ -199,6 +199,7 @@ function App() {
   useEffect(() => {
     const token = getToken();
     if (!token || token === "undefined") {
+      setIsAuthSettled(true);
       return;
     }
 
@@ -244,6 +245,7 @@ function App() {
                   <ProtectedRoute
                     isLoggedIn={isLoggedIn}
                     isAuthSettled={isAuthSettled}
+                    setActiveModal={setActiveModal}
                   >
                     <SavedNews
                       isLoggedIn={isLoggedIn}
