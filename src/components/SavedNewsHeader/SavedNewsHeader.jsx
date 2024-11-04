@@ -16,28 +16,6 @@ function SavedNewsHeader() {
       return accumulator;
     }, []);
 
-  console.log(keywords);
-
-  const {
-    length: keywordsLength,
-    0: firstKeyword,
-    1: secondKeyword,
-  } = Object.keys(keywords);
-
-  // const getKeywords = () => {
-  //   const currentKeywordsWithDuplicates = userArticles.map(
-  //     (article) => article.keyword
-  //   );
-  //   const currentKeywordsLowercase = [
-  //     ...new Set(currentKeywordsWithDuplicates),
-  //   ];
-  //   return currentKeywordsLowercase.map(
-  //     (keyword) => keyword[0].toUpperCase() + keyword.slice(1)
-  //   );
-  // };
-
-  // const currentKeywords = getKeywords();
-
   return (
     <section className="saved-news-header">
       <h3 className="saved-news-header__title">Saved articles</h3>
