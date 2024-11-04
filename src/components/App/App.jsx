@@ -249,7 +249,6 @@ function App() {
                   >
                     <SavedNews
                       isLoggedIn={isLoggedIn}
-                      currentUser={currentUser}
                       handleLogout={handleLogout}
                       handleDeleteArticle={handleDeleteArticle}
                     />
