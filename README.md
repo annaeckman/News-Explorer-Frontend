@@ -16,4 +16,4 @@ The idea of the project is to make a call to a public news API, which responds w
 
 ## Links
 
-- [Deployed Site](https://merry-speculoos-9435b5.netlify.app/saved-news)
+- [Deployed Site](https://merry-speculoos-9435b5.netlify.app/)
