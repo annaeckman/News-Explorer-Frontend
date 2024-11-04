@@ -236,6 +236,7 @@ function App() {
                     setCurrentKeyword={setCurrentKeyword}
                     handleSaveArticle={handleSaveArticle}
                     handleDeleteArticle={handleDeleteArticle}
+                    setActiveModal={setActiveModal}
                   />
                 }
               ></Route>

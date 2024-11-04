@@ -8,6 +8,7 @@ function NewsCard({
   isLoggedIn,
   handleSaveArticle,
   handleDeleteArticle,
+  setActiveModal,
 }) {
   const location = useLocation();
 
@@ -26,8 +27,12 @@ function NewsCard({
   const [isClicked, setIsClicked] = useState(false);
 
   const handleSaveClick = () => {
-    isClicked === true ? setIsClicked(false) : setIsClicked(true);
-    handleSaveArticle(article);
+    if (isLoggedIn) {
+      isClicked === true ? setIsClicked(false) : setIsClicked(true);
+      handleSaveArticle(article);
+      return;
+    }
+    setActiveModal("login");
   };
 
   const handleDeleteClick = () => {
@@ -49,7 +54,6 @@ function NewsCard({
 
           {location.pathname === "/" && (
             <button
-              disabled={!isLoggedIn}
               className={
                 isClicked
                   ? "news-card__save_active news-card__save"

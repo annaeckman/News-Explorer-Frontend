@@ -15,6 +15,7 @@ function Main({
   setCurrentKeyword,
   handleSaveArticle,
   handleDeleteArticle,
+  setActiveModal,
 }) {
   const handleChange = (e) => {
     const value = e.target.value;
@@ -39,6 +40,7 @@ function Main({
           isLoggedIn={isLoggedIn}
           handleSaveArticle={handleSaveArticle}
           handleDeleteArticle={handleDeleteArticle}
+          setActiveModal={setActiveModal}
         />
         <AboutMe />
       </main>

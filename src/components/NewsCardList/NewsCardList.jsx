@@ -14,6 +14,7 @@ function NewsCardList({
   isLoggedIn,
   handleSaveArticle,
   handleDeleteArticle,
+  setActiveModal,
 }) {
   newsData = newsData.filter((article) => article.title !== "[Removed]");
   //filter out articles that say "removed"
@@ -79,6 +80,7 @@ function NewsCardList({
               article={article}
               handleSaveArticle={handleSaveArticle}
               handleDeleteArticle={handleDeleteArticle}
+              setActiveModal={setActiveModal}
             />
           ))}
         </ul>
