@@ -34,11 +34,7 @@ function App() {
   const [isSuccessNewsData, setIsSuccessNewsData] = useState(false);
   const [isError, setIsError] = useState(false);
   const [protectedDestination, setProtectedDestination] = useState("");
-  const [authLoaded, setIsAuthLoaded] = useState(false);
-
-  useEffect(() => {
-    if (protectedDestination !== "") setActiveModal("login");
-  }, [protectedDestination]);
+  const [isAuthSettled, setIsAuthSettled] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,6 +47,10 @@ function App() {
     userArticles,
     setUserArticles,
   };
+
+  // useEffect(() => {
+  //   if (protectedDestination !== "") setActiveModal("login");
+  // }, [protectedDestination]);
 
   const handleSearchSubmit = () => {
     if (currentKeyword === "") {
@@ -121,7 +121,6 @@ function App() {
       .then((newArticle) => {
         console.log(newArticle);
         setUserArticles((prevArticles) => [...prevArticles, newArticle.data]);
-        console.log(userArticles);
       })
       .catch((err) => console.error(err));
   };
@@ -181,8 +180,6 @@ function App() {
     });
   }, [currentUser, isLoggedIn]);
 
-  // userArticles, only updates after refresh...????
-
   useEffect(() => {
     if (!activeModal) return;
 
@@ -209,8 +206,12 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
         setIsLoggedIn(true);
+        setIsAuthSettled(true);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        setIsAuthSettled(true);
+      });
   }, []);
 
   return (
@@ -241,8 +242,8 @@ function App() {
                 path="/saved-news"
                 element={
                   <ProtectedRoute
-                    setProtectedDestination={setProtectedDestination}
                     isLoggedIn={isLoggedIn}
+                    isAuthSettled={isAuthSettled}
                   >
                     <SavedNews
                       isLoggedIn={isLoggedIn}

@@ -43,7 +43,3 @@ function Nav({ handleLoginClick, isInverse, isLoggedIn, handleLogout }) {
 }
 
 export default Nav;
-
-// Stil to do:
-// add onClick to signout button
-// add the little bar that follows the border, depending on what page you're on

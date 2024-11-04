@@ -1,25 +1,16 @@
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import Nav from "../Nav/Nav";
+// When i load the app, isLoggedIn will be false, pretty much always
 
-export default function ProtectedRoute({
-  children,
-  isLoggedIn,
-  setProtectedDestination,
-}) {
-  const location = useLocation();
-  const navigate = useNavigate();
+const ProtectedRoute = ({ children, isLoggedIn, isAuthSettled }) => {
+  if (!isAuthSettled) {
+    return <Nav isInverse={true} />;
+  }
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      setProtectedDestination(location.pathname);
-      navigate("/");
-    }
-  }, [isLoggedIn, navigate, location.pathname, setProtectedDestination]);
+  if (!isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
 
-  if (!isLoggedIn) return;
-  if (isLoggedIn) return children;
-}
-
-// this protected route is firing after refresh on saved-news page.
-// so using isLoggedIn, isn't working, i have to figure out a way
-// to tell if the jwt check has happened or not??
+  return children;
+};
+export default ProtectedRoute;
