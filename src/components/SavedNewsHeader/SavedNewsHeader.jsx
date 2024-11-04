@@ -7,11 +7,22 @@ function SavedNewsHeader() {
   const { currentUser } = useContext(CurrentUserContext);
   const { userArticles } = useContext(UserArticleContext);
 
-  const keywords = userArticles.map((article) => article.keyword);
+  const keywords = userArticles
+    .map((article) => article.keyword)
+    .reduce((accumulator, item) => {
+      if (!accumulator.includes(item)) {
+        accumulator.push(item);
+      }
+      return accumulator;
+    }, []);
 
-  const keywordsWithoutDuplicates = keywords.reduce((uniques, current) => {
-    return { ...uniques, [current]: true };
-  }, {});
+  console.log(keywords);
+
+  const {
+    length: keywordsLength,
+    0: firstKeyword,
+    1: secondKeyword,
+  } = Object.keys(keywords);
 
   // const getKeywords = () => {
   //   const currentKeywordsWithDuplicates = userArticles.map(
@@ -25,26 +36,30 @@ function SavedNewsHeader() {
   //   );
   // };
 
-  const currentKeywords = getKeywords();
-  console.log(userArticles.length);
+  // const currentKeywords = getKeywords();
+
   return (
     <section className="saved-news-header">
       <h3 className="saved-news-header__title">Saved articles</h3>
       <p className="saved-news-header__subtitle">
-        {currentUser?.name}, you have {userArticles?.length} saved articles
+        {currentUser?.name}, you have {userArticles?.length} saved article
+        <span>{userArticles.length === 1 ? "" : "s"}</span>
       </p>
-      {!userArticles.length === 0 && (
-        <p className="saved-news-header__keywords">
-          By keywords:{" "}
-          <span className="saved-news-header__keywords_bold">
-            {currentKeywords[0]}, {currentKeywords[1]}, and{" "}
-            {currentKeywords.length === 3
-              ? currentKeywords[2]
-              : currentKeywords.length - 2}{" "}
-            {currentKeywords.length > 3 && "others"}
-          </span>
-        </p>
-      )}
+
+      <p className="saved-news-header__keywords">
+        By keywords:{" "}
+        <span className="saved-news-header__keywords_bold">
+          {keywords.length > 2
+            ? `${keywords[0]}, ${keywords[1]}, and ${
+                keywords.length - 2
+              } other${keywords.length > 3 ? "s" : ""}`
+            : keywords.length === 2
+            ? `${keywords[0]} and ${keywords[1]}`
+            : keywords.length === 1
+            ? keywords[0]
+            : "no keywords yet"}
+        </span>
+      </p>
     </section>
   );
 }
