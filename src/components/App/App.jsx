@@ -102,7 +102,7 @@ function App() {
     if (!token) return;
 
     for (let i = 0; i <= userArticles.length; i++) {
-      console.log(userArticles[i].title);
+      if (userArticles[i].title === article.title) return;
     }
 
     saveArticle(
