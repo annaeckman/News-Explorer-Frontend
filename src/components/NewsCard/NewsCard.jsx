@@ -1,6 +1,7 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import "../NewsCard/NewsCard.css";
 import { useLocation } from "react-router-dom";
+import { UserArticleContext } from "../../contexts/UserArticleContext";
 import { Link } from "react-router-dom";
 
 function NewsCard({
@@ -11,6 +12,8 @@ function NewsCard({
   setActiveModal,
 }) {
   const location = useLocation();
+  const { userArticles } = useContext(UserArticleContext);
+  const [isClicked, setIsClicked] = useState(false);
 
   const source =
     location.pathname === "/"
@@ -23,8 +26,6 @@ function NewsCard({
     month: "long",
     day: "numeric",
   });
-
-  const [isClicked, setIsClicked] = useState(false);
 
   const handleSaveClick = () => {
     if (isLoggedIn) {

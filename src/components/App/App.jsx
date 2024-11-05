@@ -48,10 +48,6 @@ function App() {
     setUserArticles,
   };
 
-  // useEffect(() => {
-  //   if (protectedDestination !== "") setActiveModal("login");
-  // }, [protectedDestination]);
-
   const handleSearchSubmit = () => {
     if (currentKeyword === "") {
       setIsSuccessNewsData(true);
@@ -103,8 +99,11 @@ function App() {
   const handleSaveArticle = (article) => {
     const token = getToken();
     const keyword = currentKeyword[0].toUpperCase() + currentKeyword.slice(1);
-
     if (!token) return;
+
+    for (let i = 0; i <= userArticles.length; i++) {
+      console.log(userArticles[i].title);
+    }
 
     saveArticle(
       {
@@ -119,21 +118,18 @@ function App() {
       token
     )
       .then((newArticle) => {
-        console.log(newArticle);
         setUserArticles((prevArticles) => [...prevArticles, newArticle.data]);
       })
       .catch((err) => console.error(err));
   };
 
   const handleDeleteArticle = (id) => {
-    console.log(id);
     const token = getToken();
 
     if (!token) return;
 
     deleteArticle(id, token)
       .then((data) => {
-        console.log(data);
         setUserArticles((prevArticles) =>
           prevArticles.filter((article) => article._id !== data.data._id)
         );
