@@ -4,10 +4,11 @@ import SearchForm from "../SearchForm/SearchForm";
 
 function Header({
   handleSearchSubmit,
-  handleChange,
   handleLoginClick,
   isLoggedIn,
   handleLogout,
+  setCurrentKeyword,
+  currentKeyword,
 }) {
   const isInverse = false;
 
@@ -30,7 +31,8 @@ function Header({
       </div>
       <SearchForm
         handleSearchSubmit={handleSearchSubmit}
-        handleChange={handleChange}
+        setCurrentKeyword={setCurrentKeyword}
+        currentKeyword={currentKeyword}
       />
     </header>
   );

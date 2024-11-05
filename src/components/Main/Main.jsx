@@ -17,19 +17,14 @@ function Main({
   handleDeleteArticle,
   setActiveModal,
 }) {
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setCurrentKeyword(value);
-  };
-
   return (
     <>
       <Header
         handleSearchSubmit={handleSearchSubmit}
-        handleChange={handleChange}
         handleLoginClick={handleLoginClick}
         isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
+        setCurrentKeyword={setCurrentKeyword}
       />
       <main className="main">
         <NewsCardsList

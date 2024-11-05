@@ -61,9 +61,9 @@ function App() {
 
     getNews(currentKeyword, APIkey, getLastWeeksDate(), getTodaysDate())
       .then((data) => {
-        setIsLoading(false);
         setIsSuccessNewsData(true);
         setNewsData(data.articles);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.error(err);
@@ -101,9 +101,11 @@ function App() {
     const keyword = currentKeyword[0].toUpperCase() + currentKeyword.slice(1);
     if (!token) return;
 
-    for (let i = 0; i <= userArticles.length; i++) {
-      if (userArticles[i].title === article.title) return;
-    }
+    // for (let i = 0; i <= userArticles.length; i++) {
+    //   if (userArticles[i].title === article.title) return;
+    // }
+
+    console.log(userArticles);
 
     saveArticle(
       {
@@ -233,6 +235,7 @@ function App() {
                     handleSaveArticle={handleSaveArticle}
                     handleDeleteArticle={handleDeleteArticle}
                     setActiveModal={setActiveModal}
+                    currentKeyword={currentKeyword}
                   />
                 }
               ></Route>
