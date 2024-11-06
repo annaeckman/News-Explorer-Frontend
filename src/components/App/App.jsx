@@ -33,7 +33,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccessNewsData, setIsSuccessNewsData] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [protectedDestination, setProtectedDestination] = useState("");
   const [isAuthSettled, setIsAuthSettled] = useState(false);
 
   const navigate = useNavigate();
@@ -77,23 +76,6 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
-  };
-
-  const handleRegistration = (values, resetRegistrationForm) => {
-    if (!values) return;
-
-    registerUser(values)
-      .then((res) => {
-        console.log(res);
-        setIsLoggedIn(true);
-        setCurrentUser(res.data);
-        resetRegistrationForm();
-        closeActiveModal();
-        setActiveModal("success");
-      })
-      .catch((res) => {
-        console.log(`There is an error in handleUserRegistration: ${res}`);
-      });
   };
 
   const handleSaveArticle = (article) => {
@@ -150,6 +132,23 @@ function App() {
         );
       })
       .catch((err) => console.error(err));
+  };
+
+  const handleRegistration = (values, resetRegistrationForm) => {
+    if (!values) return;
+
+    registerUser(values)
+      .then((res) => {
+        console.log(res);
+        setIsLoggedIn(true);
+        setCurrentUser(res.data);
+        resetRegistrationForm();
+        closeActiveModal();
+        setActiveModal("success");
+      })
+      .catch((res) => {
+        console.log(`There is an error in handleUserRegistration: ${res}`);
+      });
   };
 
   const handleLogin = (values, resetLoginForm) => {
