@@ -33,7 +33,7 @@ function NewsCard({
 
   const handleSaveClick = () => {
     if (isLoggedIn) {
-      isClicked === true ? setIsClicked(false) : setIsClicked(true);
+      isSaved === true ? setIsClicked(false) : setIsClicked(true);
       handleSaveArticle(article);
       return;
     }
@@ -60,7 +60,7 @@ function NewsCard({
           {location.pathname === "/" && (
             <button
               className={
-                isSaved && isClicked
+                isSaved
                   ? "news-card__save_active news-card__save"
                   : "news-card__save"
               }

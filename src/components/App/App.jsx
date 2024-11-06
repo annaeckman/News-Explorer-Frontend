@@ -110,12 +110,16 @@ function App() {
         return existingArticle.link === article.url;
       })
     ) {
-      // deleteArticle(
-      //   userArticles.find(
-      //     (existingArticle) => existingArticle.link === article.url
-      //   )._id,
-      //   token
-      // );
+      const unSavedArticle = userArticles.find(
+        (existingArticle) => existingArticle.link === article.url
+      );
+      deleteArticle(unSavedArticle._id, token)
+        .then((data) => {
+          setUserArticles((prevArticles) =>
+            prevArticles.filter((article) => article._id !== data.data._id)
+          );
+        })
+        .catch((err) => console.error(err));
       return;
     }
 
