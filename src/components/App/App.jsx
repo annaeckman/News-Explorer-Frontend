@@ -101,11 +101,10 @@ function App() {
     const keyword = currentKeyword[0].toUpperCase() + currentKeyword.slice(1);
     if (!token) return;
 
+    // check if the article is already in the userArticles array (NOT WORKING!!!!)
     // for (let i = 0; i <= userArticles.length; i++) {
-    //   if (userArticles[i].title === article.title) return;
+    //   if (userArticles[i].link === article.url) return;
     // }
-
-    console.log(userArticles);
 
     saveArticle(
       {
@@ -120,6 +119,14 @@ function App() {
       token
     )
       .then((newArticle) => {
+        const token = getToken();
+        // add a check for matching articles...if matching, then delete it! here.
+        const matchingArticle = userArticles.find((existingArticle) => {
+          console.log(existingArticle);
+          existingArticle.link === newArticle.data.link;
+        });
+        console.log(matchingArticle);
+        // deleteArticle(matchingArticleId, token);
         setUserArticles((prevArticles) => [...prevArticles, newArticle.data]);
       })
       .catch((err) => console.error(err));

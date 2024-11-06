@@ -10,7 +10,8 @@ function SearchForm({ handleSearchSubmit, setCurrentKeyword }) {
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    setCurrentKeyword(value);
+    console.log(value);
+    setCurrentKeyword(e.target.value);
   };
 
   return (
@@ -24,7 +25,7 @@ function SearchForm({ handleSearchSubmit, setCurrentKeyword }) {
             placeholder="Enter topic"
             maxLength="20"
             required
-            value={value}
+            value={value || ""}
           />
           <button className="search__submit-button">Search</button>
         </div>
@@ -34,3 +35,6 @@ function SearchForm({ handleSearchSubmit, setCurrentKeyword }) {
 }
 
 export default SearchForm;
+
+// broke setCurrentKeyword...now it's not grabbing the whole word?!
+//
