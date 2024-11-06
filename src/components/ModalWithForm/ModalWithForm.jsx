@@ -1,4 +1,4 @@
-import "./modalWithForm.css";
+import "./ModalWithForm.css";
 
 function ModalWithForm({
   onSubmit,
@@ -14,6 +14,12 @@ function ModalWithForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit();
+  };
+
+  const handleOverlay = (e) => {
+    if (e.target === e.currentTarget) {
+      closeActiveModal();
+    }
   };
 
   return (

@@ -12,7 +12,7 @@ const RegisterModal = ({
     useFormAndValidation();
 
   const handleSubmit = () => {
-    handleRegistration(values, resetCurrentForm);
+    handleRegistration({ ...values, name: values.username }, resetCurrentForm);
   };
 
   const resetCurrentForm = () => {

@@ -37,6 +37,16 @@
   text-overflow: ellipsis;
 }
 
+.news-card__title-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.news-card__title-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .news-card__date {
   padding: 20px 24px 12px;
   font-family: "Roboto";
@@ -185,6 +195,7 @@
     margin: 12px 16px;
     font-size: 22px;
   }
+
   .news-card__description {
     margin: 0 16px;
     max-height: 88px;
@@ -199,6 +210,12 @@
     height: 40px;
     top: 8px;
     left: 8px;
+  }
+
+  .news-card__sign-in-icon {
+    top: 8px;
+    left: 8px;
+    width: 160px;
   }
 }
 

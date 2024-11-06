@@ -4,12 +4,7 @@ import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SavedCardsList from "../SavedCardsList/SavedCardsList";
 import { pageAppearances } from "../../utils/pageAppearances";
 
-function SavedNews({
-  handleHamburgerClick,
-  isLoggedIn,
-  currentUser,
-  handleLogout,
-}) {
+function SavedNews({ isLoggedIn, handleLogout, handleDeleteArticle }) {
   const isInverse = pageAppearances.home === "dark";
 
   return (
@@ -17,11 +12,10 @@ function SavedNews({
       <Nav
         isInverse={isInverse}
         isLoggedIn={isLoggedIn}
-        handleHamburgerClick={handleHamburgerClick}
         handleLogout={handleLogout}
       />
-      <SavedNewsHeader currentUser={currentUser} />
-      <SavedCardsList />
+      <SavedNewsHeader />
+      <SavedCardsList handleDeleteArticle={handleDeleteArticle} />
     </div>
   );
 }

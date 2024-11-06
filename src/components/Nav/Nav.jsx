@@ -6,8 +6,6 @@ import { useState } from "react";
 
 function Nav({ handleLoginClick, isInverse, isLoggedIn, handleLogout }) {
   const [isClicked, setIsClicked] = useState(false);
-  //build handler for hamburger button
-  //build ham menu in nav
 
   const handleHamburgerClick = () => {
     setIsClicked(true);
@@ -45,7 +43,3 @@ function Nav({ handleLoginClick, isInverse, isLoggedIn, handleLogout }) {
 }
 
 export default Nav;
-
-// Stil to do:
-// add onClick to signout button
-// add the little bar that follows the border, depending on what page you're on

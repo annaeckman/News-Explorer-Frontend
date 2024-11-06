@@ -1,14 +1,14 @@
-import "../Header/header.css";
+import "../Header/Header.css";
 import Nav from "../Nav/Nav";
 import SearchForm from "../SearchForm/SearchForm";
 
 function Header({
   handleSearchSubmit,
-  handleChange,
   handleLoginClick,
-  handleHamburgerClick,
   isLoggedIn,
   handleLogout,
+  setCurrentKeyword,
+  currentKeyword,
 }) {
   const isInverse = false;
 
@@ -18,7 +18,6 @@ function Header({
         <Nav
           handleLoginClick={handleLoginClick}
           isInverse={false}
-          handleHamburgerClick={handleHamburgerClick}
           isLoggedIn={isLoggedIn}
           handleLogout={handleLogout}
         />
@@ -32,7 +31,8 @@ function Header({
       </div>
       <SearchForm
         handleSearchSubmit={handleSearchSubmit}
-        handleChange={handleChange}
+        setCurrentKeyword={setCurrentKeyword}
+        currentKeyword={currentKeyword}
       />
     </header>
   );

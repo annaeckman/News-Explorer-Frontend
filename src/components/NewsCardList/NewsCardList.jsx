@@ -4,9 +4,16 @@ import { useState } from "react";
 import notFound from "../../assets/not-found.png";
 import Preloader from "../Preloader/Preloader";
 
-// i need to hide the button when all 100 items are shown
-
-function NewsCardList({ newsData, isSuccess, isLoading, isError, isLoggedIn }) {
+function NewsCardList({
+  newsData,
+  isSuccess,
+  isLoading,
+  isError,
+  isLoggedIn,
+  handleSaveArticle,
+  handleDeleteArticle,
+  setActiveModal,
+}) {
   newsData = newsData.filter((article) => article.title !== "[Removed]");
   //filter out articles that say "removed"
 
@@ -17,7 +24,8 @@ function NewsCardList({ newsData, isSuccess, isLoading, isError, isLoggedIn }) {
     setActiveNewsDataLength((prevState) => prevState + 3);
   };
 
-  const isInitialState = newsData.length === 0 && !isSuccess && !isError;
+  const isInitialState =
+    newsData.length === 0 && !isSuccess && !isError && !isLoading;
   const emptyNewsDataArray = newsData.length === 0 && isSuccess;
 
   return (
@@ -69,6 +77,9 @@ function NewsCardList({ newsData, isSuccess, isLoading, isError, isLoggedIn }) {
               isLoggedIn={isLoggedIn}
               key={article.url}
               article={article}
+              handleSaveArticle={handleSaveArticle}
+              handleDeleteArticle={handleDeleteArticle}
+              setActiveModal={setActiveModal}
             />
           ))}
         </ul>

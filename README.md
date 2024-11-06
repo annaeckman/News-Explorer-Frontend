@@ -16,4 +16,4 @@ The idea of the project is to make a call to a public news API, which responds w
 
 ## Links
 
-- [Frontend Deployed Site](https://annaeckman.github.io/News-Explorer-Frontend/)
+- [Deployed Site](https://merry-speculoos-9435b5.netlify.app/)

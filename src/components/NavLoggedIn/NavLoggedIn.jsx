@@ -39,7 +39,7 @@ function NavLoggedIn({ isInverse, handleLogout }) {
       </li>
       <li className="nav__list-item">
         <div className="nav__signout-div">
-          <p className="nav__signout-name">Elise{currentUser?.name}</p>
+          <p className="nav__signout-name">{currentUser?.name}</p>
           <button onClick={handleLogout} className={signoutBtnClass}></button>
         </div>
       </li>

@@ -1,0 +1,15 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://newsapi.org/v2/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*" # you can configure the correct paths here
+  [headers.values]
+    access-control-allow-origin = "*"

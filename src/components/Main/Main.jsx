@@ -5,7 +5,6 @@ import NewsCardsList from "../NewsCardList/NewsCardList";
 
 function Main({
   handleLoginClick,
-  handleHamburgerClick,
   isLoggedIn,
   handleLogout,
   handleSearchSubmit,
@@ -14,21 +13,18 @@ function Main({
   isLoading,
   isError,
   setCurrentKeyword,
+  handleSaveArticle,
+  handleDeleteArticle,
+  setActiveModal,
 }) {
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setCurrentKeyword(value);
-  };
-
   return (
     <>
       <Header
         handleSearchSubmit={handleSearchSubmit}
-        handleChange={handleChange}
         handleLoginClick={handleLoginClick}
-        handleHamburgerClick={handleHamburgerClick}
         isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
+        setCurrentKeyword={setCurrentKeyword}
       />
       <main className="main">
         <NewsCardsList
@@ -37,6 +33,9 @@ function Main({
           isLoading={isLoading}
           isError={isError}
           isLoggedIn={isLoggedIn}
+          handleSaveArticle={handleSaveArticle}
+          handleDeleteArticle={handleDeleteArticle}
+          setActiveModal={setActiveModal}
         />
         <AboutMe />
       </main>

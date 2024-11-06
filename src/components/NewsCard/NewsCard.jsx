@@ -1,39 +1,66 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import "../NewsCard/NewsCard.css";
 import { useLocation } from "react-router-dom";
+import { UserArticleContext } from "../../contexts/UserArticleContext";
+import { Link } from "react-router-dom";
 
-function NewsCard({ article, isLoggedIn }) {
+function NewsCard({
+  article,
+  isLoggedIn,
+  handleSaveArticle,
+  handleDeleteArticle,
+  setActiveModal,
+}) {
   const location = useLocation();
-  const source = article.source.name.toUpperCase().split(".")[0];
-  const dateInWords = new Date(article.publishedAt).toLocaleString("default", {
+  const { userArticles } = useContext(UserArticleContext);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const source =
+    location.pathname === "/"
+      ? article.source.name.toUpperCase().split(".")[0]
+      : article.source.toUpperCase().split(".")[0];
+  const dateInWords = new Date(
+    location.pathname === "/" ? article.publishedAt : article.date
+  ).toLocaleString("default", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  const [isClicked, setIsClicked] = useState(false);
+  const isSaved = userArticles.some((existingArticle) => {
+    return existingArticle.link === article.url;
+  });
 
   const handleSaveClick = () => {
-    isClicked === true ? setIsClicked(false) : setIsClicked(true);
-    // add logic to add saved article to currentUser state...?
+    if (isLoggedIn) {
+      isSaved === true ? setIsClicked(false) : setIsClicked(true);
+      handleSaveArticle(article);
+      return;
+    }
+    setActiveModal("login");
+  };
+
+  const handleDeleteClick = () => {
+    handleDeleteArticle(article._id);
   };
 
   return (
     <div className="news-card__container">
       <div className="news-card__image-container">
         {location.pathname === "/saved-news" && (
-          <div className="news-card__keyword-icon">Nature</div>
+          <div className="news-card__keyword-icon">{article.keyword}</div>
         )}
         <div className="news-card__btns">
-          <div className="news-card__sign-in-icon">
-            Sign in to save articles
-          </div>
+          {!isLoggedIn && location.pathname === "/" && (
+            <div className="news-card__sign-in-icon">
+              Sign in to save articles
+            </div>
+          )}
 
           {location.pathname === "/" && (
             <button
-              disabled={!isLoggedIn}
               className={
-                isClicked
+                isSaved
                   ? "news-card__save_active news-card__save"
                   : "news-card__save"
               }
@@ -41,11 +68,14 @@ function NewsCard({ article, isLoggedIn }) {
             ></button>
           )}
           {location.pathname === "/saved-news" && (
-            <button className="news-card__delete"></button>
+            <button
+              className="news-card__delete"
+              onClick={handleDeleteClick}
+            ></button>
           )}
         </div>
         <img
-          src={article.urlToImage}
+          src={location.pathname === "/" ? article.urlToImage : article.image}
           alt={article.title}
           className="news-card__image"
         />
@@ -55,8 +85,16 @@ function NewsCard({ article, isLoggedIn }) {
       make save button & icon it's own component */}
       <div className="news-card__text">
         <span className="news-card__date">{dateInWords}</span>
-        <h2 className="news-card__title">{article.title}</h2>
-        <p className="news-card__description">{article.description}</p>
+        <Link
+          to={article.link}
+          target="_blank"
+          className="news-card__title-link"
+        >
+          <h2 className="news-card__title">{article.title}</h2>
+        </Link>
+        <p className="news-card__description">
+          {location.pathname === "/" ? article.description : article.text}
+        </p>
         <span className="news-card__source">{source}</span>
       </div>
     </div>
