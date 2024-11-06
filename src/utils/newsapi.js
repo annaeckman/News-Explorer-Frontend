@@ -9,9 +9,10 @@ export const getNews = (q, apiKey, from, to) => {
     `${baseUrl}?q=${q}&from=${from}&to=${to}&pageSize=100&apiKey=${
       import.meta.env.VITE_NEWS_API_KEY
     }`
-  )
-    .then((res) => {
-      return new Promise((r) => setTimeout(() => r(res), 30000));
-    })
-    .then(processServerResponse);
+  ).then(processServerResponse);
 };
+
+// fake timeout for testing:
+// .then((res) => {
+//   return new Promise((r) => setTimeout(() => r(res), 30000));
+// })
