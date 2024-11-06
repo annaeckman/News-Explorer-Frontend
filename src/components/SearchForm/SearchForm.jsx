@@ -11,7 +11,6 @@ function SearchForm({ handleSearchSubmit, setCurrentKeyword }) {
   const handleChange = (e) => {
     const newValue = e.target.value;
     setValue(newValue);
-    console.log(newValue);
     setCurrentKeyword(newValue);
   };
 
@@ -36,6 +35,3 @@ function SearchForm({ handleSearchSubmit, setCurrentKeyword }) {
 }
 
 export default SearchForm;
-
-// broke setCurrentKeyword...now it's not grabbing the whole word?!
-//

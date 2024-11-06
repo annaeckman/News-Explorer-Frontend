@@ -96,15 +96,28 @@ function App() {
       });
   };
 
+  // new function for updating savednews:
+  //
+
   const handleSaveArticle = (article) => {
     const token = getToken();
     const keyword = currentKeyword[0].toUpperCase() + currentKeyword.slice(1);
     if (!token) return;
 
-    // check if the article is already in the userArticles array (NOT WORKING!!!!)
-    // for (let i = 0; i <= userArticles.length; i++) {
-    //   if (userArticles[i].link === article.url) return;
-    // }
+    // check if the article is already in the userArticles array
+    if (
+      userArticles.some((existingArticle) => {
+        return existingArticle.link === article.url;
+      })
+    ) {
+      // deleteArticle(
+      //   userArticles.find(
+      //     (existingArticle) => existingArticle.link === article.url
+      //   )._id,
+      //   token
+      // );
+      return;
+    }
 
     saveArticle(
       {
@@ -119,14 +132,6 @@ function App() {
       token
     )
       .then((newArticle) => {
-        const token = getToken();
-        // add a check for matching articles...if matching, then delete it! here.
-        const matchingArticle = userArticles.find((existingArticle) => {
-          console.log(existingArticle);
-          existingArticle.link === newArticle.data.link;
-        });
-        console.log(matchingArticle);
-        // deleteArticle(matchingArticleId, token);
         setUserArticles((prevArticles) => [...prevArticles, newArticle.data]);
       })
       .catch((err) => console.error(err));

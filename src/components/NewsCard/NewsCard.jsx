@@ -27,6 +27,10 @@ function NewsCard({
     day: "numeric",
   });
 
+  const isSaved = userArticles.some((existingArticle) => {
+    return existingArticle.link === article.url;
+  });
+
   const handleSaveClick = () => {
     if (isLoggedIn) {
       isClicked === true ? setIsClicked(false) : setIsClicked(true);
@@ -56,7 +60,7 @@ function NewsCard({
           {location.pathname === "/" && (
             <button
               className={
-                isClicked
+                isSaved && isClicked
                   ? "news-card__save_active news-card__save"
                   : "news-card__save"
               }
