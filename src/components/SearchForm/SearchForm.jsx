@@ -9,9 +9,10 @@ function SearchForm({ handleSearchSubmit, setCurrentKeyword }) {
   };
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-    console.log(value);
-    setCurrentKeyword(e.target.value);
+    const newValue = e.target.value;
+    setValue(newValue);
+    console.log(newValue);
+    setCurrentKeyword(newValue);
   };
 
   return (
