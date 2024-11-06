@@ -96,9 +96,6 @@ function App() {
       });
   };
 
-  // new function for updating savednews:
-  //
-
   const handleSaveArticle = (article) => {
     const token = getToken();
     const keyword = currentKeyword[0].toUpperCase() + currentKeyword.slice(1);

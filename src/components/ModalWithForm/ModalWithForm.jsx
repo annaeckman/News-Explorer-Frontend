@@ -16,6 +16,12 @@ function ModalWithForm({
     onSubmit();
   };
 
+  const handleOverlay = (e) => {
+    if (e.target === e.currentTarget) {
+      closeActiveModal();
+    }
+  };
+
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content">

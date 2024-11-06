@@ -24,7 +24,8 @@ function NewsCardList({
     setActiveNewsDataLength((prevState) => prevState + 3);
   };
 
-  const isInitialState = newsData.length === 0 && !isSuccess && !isError;
+  const isInitialState =
+    newsData.length === 0 && !isSuccess && !isError && !isLoading;
   const emptyNewsDataArray = newsData.length === 0 && isSuccess;
 
   return (
