@@ -7,7 +7,7 @@ import Preloader from "../Preloader/Preloader";
 function NewsCardList({
   newsData,
   isSuccess,
-  isLoading,
+  isLoadingNewsData,
   isError,
   isLoggedIn,
   handleSaveArticle,
@@ -25,7 +25,7 @@ function NewsCardList({
   };
 
   const isInitialState =
-    newsData.length === 0 && !isSuccess && !isError && !isLoading;
+    newsData.length === 0 && !isSuccess && !isError && !isLoadingNewsData;
   const emptyNewsDataArray = newsData.length === 0 && isSuccess;
 
   return (
@@ -58,7 +58,7 @@ function NewsCardList({
       {/* Preloader: */}
       <div
         className={
-          isLoading
+          isLoadingNewsData
             ? "news-cards-list__preloader"
             : "news-cards-list__preloader news-cards-list__preloader_hidden"
         }

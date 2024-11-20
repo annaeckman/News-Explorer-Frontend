@@ -10,7 +10,7 @@ function Main({
   handleSearchSubmit,
   newsData,
   isSuccess,
-  isLoading,
+  isLoadingNewsData,
   isError,
   setCurrentKeyword,
   handleSaveArticle,
@@ -30,7 +30,7 @@ function Main({
         <NewsCardsList
           newsData={newsData}
           isSuccess={isSuccess}
-          isLoading={isLoading}
+          isLoadingNewsData={isLoadingNewsData}
           isError={isError}
           isLoggedIn={isLoggedIn}
           handleSaveArticle={handleSaveArticle}

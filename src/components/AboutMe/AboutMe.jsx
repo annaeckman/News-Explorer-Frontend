@@ -1,12 +1,13 @@
 import "../AboutMe/AboutMe.css";
 import selfie from "../../assets/anna-selfie.jpeg";
+import picture from "../../assets/anna-picture.jpg";
 
 function AboutMe() {
   return (
     <section className="about">
       <div className="about__selfie-container">
         <img
-          src={selfie}
+          src={picture}
           alt="close up picture of anna's face in black and white"
           className="about__selfie"
         />

@@ -30,7 +30,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [newsData, setNewsData] = useState([]);
   const [currentKeyword, setCurrentKeyword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingNewsData, setIsLoadingNewsData] = useState(false);
   const [isSuccessNewsData, setIsSuccessNewsData] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isAuthSettled, setIsAuthSettled] = useState(false);
@@ -48,12 +48,13 @@ function App() {
   };
 
   const handleSearchSubmit = () => {
+    // if user did not type anything, don't call the api
     if (currentKeyword === "") {
       setIsSuccessNewsData(true);
       return;
     }
 
-    setIsLoading(true);
+    setIsLoadingNewsData(true);
     setNewsData([]);
     setIsSuccessNewsData(false);
     setIsError(false);
@@ -62,7 +63,7 @@ function App() {
       .then((data) => {
         setIsSuccessNewsData(true);
         setNewsData(data.articles);
-        setIsLoading(false);
+        setIsLoadingNewsData(false);
       })
       .catch((err) => {
         console.error(err);
@@ -241,7 +242,7 @@ function App() {
                     handleSearchSubmit={handleSearchSubmit}
                     newsData={newsData}
                     isSuccess={isSuccessNewsData}
-                    isLoading={isLoading}
+                    isLoading={isLoadingNewsData}
                     isError={isError}
                     setCurrentKeyword={setCurrentKeyword}
                     handleSaveArticle={handleSaveArticle}
