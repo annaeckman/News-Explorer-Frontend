@@ -1,5 +1,4 @@
 import "../AboutMe/AboutMe.css";
-import selfie from "../../assets/anna-selfie.jpeg";
 import picture from "../../assets/anna-picture.jpg";
 
 function AboutMe() {
